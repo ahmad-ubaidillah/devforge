@@ -1,0 +1,10 @@
+{
+  "name": "openapi",
+  "description": "Auto-Generated OpenAPI / Swagger Documentation plugin.",
+  "compatibleTemplates": ["saas", "marketplace", "crm"],
+  "packageDependencies": {
+    "@hono/swagger-ui": "^0.4.0",
+    "@hono/zod-openapi": "^0.15.1"
+  },
+  "packageDevDependencies": {}
+}

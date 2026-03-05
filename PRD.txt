@@ -1,0 +1,1003 @@
+Product Requirement Document (PRD)
+Project Name
+
+DevForge CLI — Modular Boilerplate Ecosystem for Modern Web Apps
+
+1. Product Overview
+Vision
+
+DevForge CLI is a modular boilerplate generator that enables developers to instantly scaffold production-ready applications with a clean architecture, optimized performance, and pluggable features.
+
+It aims to eliminate the repetitive work developers face when starting projects such as:
+
+setting up architecture
+
+configuring authentication
+
+managing environment variables
+
+structuring services
+
+writing error handling
+
+setting up database layers
+
+Instead, developers can run:
+
+npx devforge-cli
+
+and generate a ready-to-run, production-grade codebase.
+
+2. Target Users
+Primary Users
+
+1. Indie Hackers
+
+building MVP quickly
+
+want fast iteration
+
+minimal configuration
+
+2. SaaS Builders
+
+building scalable multi-tenant apps
+
+need authentication, payments, roles
+
+3. Agencies
+
+need reusable project templates
+
+4. QA / Automation Engineers
+
+need predictable architecture
+
+easier test automation
+
+3. Problem Statement
+
+Modern web development suffers from boilerplate fatigue.
+
+Developers repeatedly recreate the same infrastructure:
+
+project structure
+
+API layers
+
+validation logic
+
+database models
+
+authentication
+
+role permissions
+
+payment integrations
+
+Existing tools are either:
+
+Overengineered
+
+Example:
+
+full enterprise frameworks
+
+heavy abstractions
+
+large bundle sizes
+
+Underpowered
+
+Example:
+
+simple scaffolding tools
+
+lack architecture patterns
+
+poor maintainability
+
+Developers need something that is:
+
+fast
+
+lightweight
+
+scalable
+
+structured
+
+4. Key Design Principles
+
+DevForge CLI follows these core principles:
+
+1. Performance First
+
+Use lightweight tools:
+
+Bun runtime
+
+Hono framework
+
+minimal dependencies
+
+2. Modular Plugins
+
+Features should be optional modules.
+
+Example:
+
+Auth
+Payments
+Search
+File Upload
+Analytics
+3. Clean Architecture
+
+Each project generated must contain:
+
+Feature-based modules
+
+Service layer
+
+Repository layer
+
+Validation layer
+
+Centralized error handling
+
+4. Framework Agnostic Frontend
+
+Frontend layer should support optional frameworks:
+
+SPA optional
+
+SSR optional
+
+5. Core Architecture
+
+Generated apps follow this structure:
+
+src
+ ├ core
+ │  ├ errors
+ │  ├ config
+ │  ├ middleware
+ │  └ utils
+ │
+ ├ modules
+ │  ├ auth
+ │  ├ users
+ │  ├ billing
+ │  └ products
+ │
+ ├ services
+ │
+ ├ repositories
+ │
+ ├ validators
+ │
+ ├ routes
+ │
+ └ app.ts
+6. Supported Boilerplates
+
+DevForge CLI initially supports 8 application templates.
+
+6.1 Landing Page
+Purpose
+
+Marketing websites and product landing pages.
+
+Tech Stack
+
+Frontend
+
+Astro
+
+TailwindCSS
+
+AlpineJS
+
+Backend
+
+None (static)
+
+Optional SPA
+
+SolidJS
+
+Features
+
+SEO optimized
+
+fast static build
+
+analytics plugin
+
+form handling
+
+6.2 SaaS Application
+Purpose
+
+Multi-tenant SaaS platforms.
+
+Tech Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Database
+
+PostgreSQL
+
+Drizzle ORM
+
+Auth
+
+Better Auth
+
+Validation
+
+Zod
+
+Core Features
+
+multi-tenant architecture
+
+subscription billing
+
+role-based access
+
+6.3 CMS Platform
+Purpose
+
+Content management system.
+
+Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Database
+
+PostgreSQL
+
+Editor
+
+TipTap
+
+Features
+
+post management
+
+role system
+
+media library
+
+6.4 Marketplace
+Purpose
+
+Ecommerce / digital marketplace platforms.
+
+Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Database
+
+PostgreSQL
+
+Features
+
+vendors
+
+products
+
+orders
+
+payments
+
+6.5 AI Wrapper
+Purpose
+
+Applications built on top of AI APIs.
+
+Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Features
+
+prompt management
+
+usage tracking
+
+API integrations
+
+6.6 Booking / Scheduling
+Purpose
+
+Calendars and scheduling platforms.
+
+Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Features
+
+calendar UI
+
+availability rules
+
+reminders
+
+6.7 Finance Tool
+Purpose
+
+Expense trackers and finance dashboards.
+
+Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Features
+
+transaction tracking
+
+reports
+
+budgeting
+
+6.8 CRM System
+Purpose
+
+Customer relationship management systems.
+
+Stack
+
+Backend
+
+Bun
+
+Hono
+
+Frontend
+
+SolidJS
+
+Features
+
+contacts
+
+pipelines
+
+tasks
+
+7. Plugin System
+
+Developers can add plugins during generation.
+
+Example prompt:
+
+Select plugins:
+[ ] Auth
+[ ] Payments
+[ ] Email
+[ ] Search
+[ ] File Upload
+8. Advanced Plugins
+Plugin Marketplace
+
+Developers can install additional modules.
+
+Example:
+
+devforge add analytics
+devforge add notifications
+Dependency Graph Validator
+
+Detect circular dependencies.
+
+Example output:
+
+AuthService -> UserRepository -> AuthService
+Circular dependency detected
+Auto Migration Merger
+
+Automatically merge multiple schema migrations.
+
+Problem solved:
+
+branch A migration
+branch B migration
+
+Instead of conflict:
+
+merged migration created automatically
+Auto Permission Binding
+
+Automatically attach permissions to routes.
+
+Example:
+
+route: POST /products
+permission: product.create
+
+Binding happens automatically.
+
+9. CLI Design
+
+CLI runs via:
+
+npx devforge-cli
+
+Example workflow:
+
+What are you building?
+
+1 Landing Page
+2 SaaS
+3 CMS
+4 Marketplace
+5 AI Wrapper
+6 Booking App
+7 Finance Tool
+8 CRM
+Template Mode
+Use ready template?
+Yes
+No
+
+If no:
+
+Select plugins
+10. Monorepo Architecture
+
+The project itself uses a monorepo.
+
+Structure:
+
+devforge
+
+packages
+ ├ cli
+ ├ core
+ ├ plugins
+
+templates
+ ├ landing
+ ├ saas
+ ├ cms
+ ├ marketplace
+ ├ ai-wrapper
+ ├ booking
+ ├ finance
+ └ crm
+11. Download Strategy
+
+Users download only selected template.
+
+Example:
+
+User selects:
+
+Marketplace
+
+CLI installs only:
+
+templates/marketplace
+12. Performance Goals
+
+Generated apps should achieve:
+
+Startup Time:
+
+< 100ms
+
+Backend bundle:
+
+< 1MB
+
+Frontend bundle:
+
+< 200KB initial
+13. Testing Strategy
+
+Templates include:
+
+Unit Testing
+
+Tools
+
+Vitest
+API Testing
+
+Example
+
+supertest
+E2E Testing
+Playwright
+14. Security Considerations
+
+Built-in security measures:
+
+CSRF protection
+
+Rate limiting
+
+Input validation
+
+Secure cookies
+
+15. Documentation
+
+Each template includes:
+
+README.md
+ARCHITECTURE.md
+PLUGINS.md
+DEPLOYMENT.md
+16. Distribution
+
+DevForge CLI distributed via:
+
+npm
+
+Installation
+
+npx devforge-cli
+17. Monetization Strategy
+
+Initial phase:
+
+Free personal tool.
+
+Later:
+
+Premium Boilerplates
+
+Paid versions include:
+
+advanced plugins
+
+AI integrations
+
+production dashboards
+
+Price range:
+
+$49 – $149
+18. Future Roadmap
+
+Phase 1
+
+CLI scaffolding
+
+Phase 2
+
+Plugin ecosystem
+
+Phase 3
+
+Plugin marketplace
+
+Phase 4
+
+Web dashboard
+
+19. Success Metrics
+
+Project success measured by:
+
+GitHub stars
+
+CLI downloads
+
+template usage
+
+premium purchases
+
+Final Insight (Important)
+
+This project is very powerful if executed well.
+
+You are basically building something similar to:
+
+create-t3-app
+
+SaaS Pegasus
+
+Bullet Train
+
+But with lighter stack + modular architecture.
+
+That combination does not exist yet in a clean form.
+
+If you want, I can also show you something very strategic next:
+
+How to design the DevForge CLI architecture so adding new boilerplates later becomes 10× easier.
+
+That part is where most CLI generators fail.
+
+Okay, add it to prd
+
+Great — I’ll extend the PRD with the missing strategic architecture section so the project becomes future-proof and scalable, especially for adding new templates and plugins without breaking the ecosystem.
+
+You can append this section at the end of the PRD.
+
+20. Boilerplate & Plugin Extensibility Architecture
+Purpose
+
+To ensure DevForge CLI can grow into a full ecosystem, the architecture must allow:
+
+easy creation of new boilerplates
+
+independent plugin development
+
+safe integration between plugins and templates
+
+minimal maintenance overhead
+
+The system must follow a modular extensibility architecture.
+
+20.1 Template Definition Standard
+
+Every boilerplate template must follow a template definition contract.
+
+Each template contains a configuration file:
+
+template.config.ts
+
+Example:
+
+export default {
+  name: "saas",
+  description: "Multi-tenant SaaS application",
+  stack: {
+    runtime: "bun",
+    backend: "hono",
+    frontend: "solidjs",
+    database: "postgres"
+  },
+  supportedPlugins: [
+    "auth",
+    "payment",
+    "email",
+    "analytics"
+  ]
+}
+
+This allows the CLI to:
+
+validate compatibility
+
+prevent unsupported plugin installs
+
+generate proper scaffolding
+
+20.2 Plugin Architecture
+
+Plugins are designed as self-contained modules.
+
+Each plugin includes:
+
+plugin.config.ts
+plugin.install.ts
+plugin.files/
+
+Example structure:
+
+plugins
+ ├ auth
+ │  ├ plugin.config.ts
+ │  ├ plugin.install.ts
+ │  └ files
+ │     ├ routes
+ │     ├ services
+ │     └ middleware
+
+Example plugin configuration:
+
+export default {
+  name: "auth",
+  description: "Authentication module",
+  compatibleWith: [
+    "saas",
+    "cms",
+    "marketplace"
+  ],
+  dependencies: [
+    "database"
+  ]
+}
+20.3 Plugin Installation Lifecycle
+
+Plugin installation follows this lifecycle.
+
+Step 1 — validate compatibility
+
+template.supportedPlugins
+
+Step 2 — check dependency graph
+
+Example:
+
+auth -> database
+payments -> auth
+
+Step 3 — install plugin files
+
+Files are copied into appropriate modules.
+
+Step 4 — run plugin installer
+
+Example:
+
+plugin.install.ts
+
+Used for:
+
+updating configs
+
+registering routes
+
+updating env variables
+
+20.4 Dependency Graph Validator
+
+To prevent architectural issues, DevForge CLI implements a dependency graph validator.
+
+Example graph:
+
+AuthService
+  -> UserRepository
+  -> EmailService
+
+If circular dependency occurs:
+
+AuthService -> UserRepository -> AuthService
+
+CLI will show:
+
+Error: circular dependency detected
+
+This protects long-term maintainability.
+
+20.5 Auto Permission Binding
+
+Permissions should automatically attach to routes.
+
+Instead of manually defining permissions:
+
+Example route file:
+
+routes/products.ts
+export const permissions = {
+  create: "product.create",
+  update: "product.update"
+}
+
+CLI generates middleware automatically:
+
+requirePermission("product.create")
+
+Benefits:
+
+consistent security
+
+easier maintenance
+
+20.6 Migration Conflict Resolver
+
+When multiple plugins modify database schema, migrations can conflict.
+
+DevForge CLI introduces an Auto Migration Merger.
+
+Example scenario:
+
+Branch A migration
+
+add users table
+
+Branch B migration
+
+add payments table
+
+CLI merges automatically:
+
+migration_merged.sql
+
+Benefits:
+
+fewer git conflicts
+
+safer CI pipelines
+
+20.7 Template Composition Engine
+
+Templates are built from components instead of static files.
+
+Example structure:
+
+template
+ ├ base
+ ├ frontend
+ ├ backend
+ └ database
+
+Example:
+
+SaaS template =
+base + backend + frontend + database
+
+This allows new templates to be created faster.
+
+Example:
+
+CRM = SaaS + pipeline module
+20.8 Feature-Based Architecture Enforcement
+
+Every generated project enforces feature-based structure.
+
+Example:
+
+modules
+ ├ auth
+ ├ users
+ ├ billing
+ └ notifications
+
+Inside each module:
+
+auth
+ ├ auth.controller.ts
+ ├ auth.service.ts
+ ├ auth.repository.ts
+ ├ auth.routes.ts
+ └ auth.validator.ts
+
+Benefits:
+
+scalable code organization
+
+easier onboarding for developers
+
+clear separation of concerns
+
+20.9 Code Quality Automation
+
+Generated apps include built-in tooling.
+
+Linting
+eslint
+Formatting
+prettier
+Type Safety
+typescript strict mode
+Commit Standards
+commitlint
+20.10 Plugin Marketplace (Future)
+
+Future versions will allow external developers to publish plugins.
+
+Example install command:
+
+devforge add analytics
+devforge add notifications
+
+Plugins will be distributed via:
+
+npm registry
+
+This enables a full ecosystem similar to:
+
+WordPress plugin ecosystem
+
+Strapi plugin system
+
+But optimized for modern TypeScript stacks.
+
+21. Competitive Advantage
+
+DevForge differentiates itself through:
+
+Lightweight stack
+
+Bun
+
+Hono
+
+SolidJS
+
+Compared to heavier frameworks like:
+
+Next.js
+
+Laravel
+
+Modular plugin ecosystem
+
+Developers install only what they need.
+
+Architecture-first design
+
+Unlike most generators, DevForge enforces:
+
+service layer
+
+repository layer
+
+validation layer
+
+centralized error handling
+
+Performance optimized
+
+Generated apps are designed for:
+
+fast startup
+
+small bundle sizes
+
+minimal dependencies
+
+22. Long-Term Vision
+
+DevForge aims to become a developer productivity platform.
+
+Future expansion may include:
+
+visual plugin marketplace
+
+architecture analysis tools
+
+automated performance audits
+
+AI-assisted code generation

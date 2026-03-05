@@ -1,0 +1,19 @@
+{
+  "name": "crm",
+  "description": "Customer Relationship Management system for leads and pipelines.",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "openapi",
+    "websocket",
+    "queue",
+    "auth",
+    "email",
+    "analytics",
+    "github-actions"
+  ]
+}

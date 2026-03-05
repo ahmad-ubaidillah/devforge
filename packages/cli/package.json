@@ -1,0 +1,22 @@
+{
+  "name": "@devforge/cli",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "devforge-cli": "./src/bin.ts"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "latest",
+    "chalk": "latest",
+    "commander": "latest",
+    "ora": "latest",
+    "@devforge/core": "workspace:*"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "email",
+  "description": "Transactional email service with support for multiple providers.",
+  "compatibleTemplates": ["saas", "marketplace", "booking", "crm", "cms", "landing"],
+  "packageDependencies": {
+    "resend": "latest",
+    "zod": "^3.22.4"
+  }
+}

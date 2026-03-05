@@ -1,0 +1,7 @@
+{
+  "name": "websocket",
+  "description": "Real-time WebSockets and Notifications.",
+  "compatibleTemplates": ["saas", "marketplace", "crm"],
+  "packageDependencies": {},
+  "packageDevDependencies": {}
+}

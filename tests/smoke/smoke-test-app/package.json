@@ -1,0 +1,31 @@
+{
+  "name": "devforge-saas-app",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --hot src/app.ts",
+    "start": "bun run src/app.ts",
+    "build": "bun build ./src/app.ts --outdir ./dist",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "hono": "latest",
+    "zod": "^3.22.4",
+    "drizzle-orm": "latest",
+    "postgres": "latest",
+    "@better-auth/hono": "latest",
+    "better-auth": "latest",
+    "@better-auth/drizzle-adapter": "latest",
+    "stripe": "latest",
+    "resend": "latest",
+    "meilisearch": "latest",
+    "@aws-sdk/client-s3": "latest",
+    "@aws-sdk/s3-request-presigner": "latest"
+  },
+  "devDependencies": {
+    "drizzle-kit": "latest",
+    "@playwright/test": "latest"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "smoke-test-finance-finance",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --hot src/app.ts",
+    "start": "bun run src/app.ts",
+    "build": "bun build ./src/app.ts --outdir ./dist"
+  },
+  "dependencies": {
+    "hono": "latest",
+    "zod": "latest",
+    "drizzle-orm": "latest",
+    "postgres": "latest"
+  }
+}

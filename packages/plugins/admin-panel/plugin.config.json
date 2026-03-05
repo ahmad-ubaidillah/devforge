@@ -1,0 +1,10 @@
+{
+  "name": "admin-panel",
+  "description": "God Mode Dashboard and Super-Admin Management Interface.",
+  "compatibleTemplates": ["saas", "marketplace"],
+  "packageDependencies": {
+    "lucide-react": "^0.300.0",
+    "recharts": "^2.10.0"
+  },
+  "packageDevDependencies": {}
+}

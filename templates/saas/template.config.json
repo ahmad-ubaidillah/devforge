@@ -1,0 +1,26 @@
+{
+  "name": "saas",
+  "description": "Multi-tenant SaaS application",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "admin-panel",
+    "openapi",
+    "websocket",
+    "queue",
+    "openapi",
+    "websocket",
+    "queue",
+    "auth",
+    "payment",
+    "email",
+    "analytics",
+    "search",
+    "file-upload",
+    "github-actions"
+  ]
+}

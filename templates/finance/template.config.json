@@ -1,0 +1,15 @@
+{
+  "name": "finance",
+  "description": "Expense tracker and finance dashboard.",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "auth",
+    "analytics",
+    "github-actions"
+  ]
+}

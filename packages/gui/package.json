@@ -1,0 +1,30 @@
+{
+  "name": "@devforge/gui",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "server": "bun run --hot server.ts",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.11",
+    "@tanstack/query-core": "^5.90.20",
+    "@tanstack/solid-query": "^5.90.23",
+    "hono": "^4.12.5",
+    "solid-js": "^1.9.10",
+    "vis-data": "^8.0.3",
+    "vis-network": "^10.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-solid": "^2.11.10"
+  }
+}

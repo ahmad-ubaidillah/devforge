@@ -1,0 +1,9 @@
+{
+  "name": "auth",
+  "description": "Authentication module using Better Auth",
+  "compatibleTemplates": ["saas", "cms", "marketplace", "booking", "finance", "crm"],
+  "packageDependencies": {
+    "better-auth": "latest",
+    "@better-auth/drizzle-adapter": "latest"
+  }
+}

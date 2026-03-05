@@ -1,0 +1,17 @@
+{
+  "name": "booking",
+  "description": "Calendar and scheduling platform with availability rules.",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "auth",
+    "email",
+    "payment",
+    "analytics",
+    "github-actions"
+  ]
+}

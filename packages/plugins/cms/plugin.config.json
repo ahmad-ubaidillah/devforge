@@ -1,0 +1,9 @@
+{
+  "name": "cms",
+  "description": "Headless CMS module for managing posts and pages",
+  "compatibleTemplates": ["saas", "cms", "marketplace"],
+  "packageDependencies": {
+    "drizzle-orm": "latest"
+  },
+  "pluginDependencies": ["auth", "file_upload"]
+}

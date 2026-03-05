@@ -1,0 +1,1 @@
+CREATE TABLE payments (id SERIAL PRIMARY KEY, user_id INTEGER);

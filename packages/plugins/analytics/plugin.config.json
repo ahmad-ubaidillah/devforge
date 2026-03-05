@@ -1,0 +1,8 @@
+{
+  "name": "analytics",
+  "description": "Event tracking and analytics integration for PostHog or Segment.",
+  "compatibleTemplates": ["saas", "marketplace", "cms", "ai_wrapper", "booking"],
+  "packageDependencies": {
+    "posthog-node": "latest"
+  }
+}

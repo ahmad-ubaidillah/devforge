@@ -1,0 +1,25 @@
+{
+  "name": "marketplace",
+  "description": "Multi-vendor ecommerce / digital marketplace platform.",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "admin-panel",
+    "openapi",
+    "websocket",
+    "queue",
+    "openapi",
+    "websocket",
+    "queue",
+    "auth",
+    "payment",
+    "email",
+    "search",
+    "file-upload",
+    "github-actions"
+  ]
+}

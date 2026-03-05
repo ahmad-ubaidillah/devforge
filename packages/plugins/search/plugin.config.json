@@ -1,0 +1,9 @@
+{
+  "name": "search",
+  "description": "Full-text search abstraction with support for PostgreSQL and MeiliSearch.",
+  "compatibleTemplates": ["saas", "marketplace", "cms"],
+  "packageDependencies": {
+    "meilisearch": "latest",
+    "zod": "^3.22.4"
+  }
+}

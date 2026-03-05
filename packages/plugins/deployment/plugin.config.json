@@ -1,0 +1,5 @@
+{
+  "name": "deployment",
+  "description": "Docker and Vercel deployment configurations for various stacks.",
+  "compatibleTemplates": ["saas", "cms", "marketplace", "ai_wrapper", "preact"]
+}

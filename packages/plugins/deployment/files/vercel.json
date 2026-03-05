@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "framework": "hono",
+  "name": "{{PROJECT_NAME}}",
+  "installCommand": "bun install",
+  "buildCommand": "bun run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api"
+    }
+  ]
+}

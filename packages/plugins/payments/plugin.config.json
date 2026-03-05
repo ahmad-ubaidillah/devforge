@@ -1,0 +1,10 @@
+{
+  "name": "payments",
+  "description": "Stripe integration for subscriptions and one-time payments.",
+  "compatibleTemplates": ["saas", "marketplace", "booking", "crm"],
+  "dependencies": ["auth"],
+  "packageDependencies": {
+    "stripe": "latest",
+    "zod": "^3.22.4"
+  }
+}

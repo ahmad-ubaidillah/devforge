@@ -1,0 +1,10 @@
+{
+  "name": "queue",
+  "description": "Background Jobs and Task Queue powered by BullMQ and Redis.",
+  "compatibleTemplates": ["saas", "marketplace", "crm"],
+  "packageDependencies": {
+    "bullmq": "^5.7.0",
+    "ioredis": "^5.3.0"
+  },
+  "packageDevDependencies": {}
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ai_wrapper",
+  "description": "Applications built on top of AI APIs with usage tracking and prompt management.",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "auth",
+    "payment",
+    "analytics",
+    "github-actions"
+  ]
+}

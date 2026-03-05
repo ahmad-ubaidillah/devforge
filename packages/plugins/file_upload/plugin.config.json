@@ -1,0 +1,10 @@
+{
+  "name": "file_upload",
+  "description": "S3-compatible file upload service.",
+  "compatibleTemplates": ["saas", "marketplace", "cms", "crm"],
+  "packageDependencies": {
+    "@aws-sdk/client-s3": "latest",
+    "@aws-sdk/s3-request-presigner": "latest",
+    "zod": "^3.22.4"
+  }
+}

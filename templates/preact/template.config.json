@@ -1,0 +1,11 @@
+{
+  "name": "preact",
+  "description": "Lightweight Preact template with Vite.",
+  "type": "frontend",
+  "supportedPlugins": [
+    "auth",
+    "email",
+    "search",
+    "github-actions"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "github-actions",
+  "description": "DevForge github-actions CI Pipeline generator",
+  "compatibleTemplates": [
+    "saas",
+    "marketplace",
+    "crm",
+    "ai_wrapper",
+    "booking",
+    "finance"
+  ],
+  "packageDependencies": {},
+  "packageDevDependencies": {}
+}

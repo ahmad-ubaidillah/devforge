@@ -1,0 +1,17 @@
+{
+  "name": "cms",
+  "description": "Content Management System with TipTap editor, media library, and post management.",
+  "stack": {
+    "runtime": "bun",
+    "backend": "hono",
+    "frontend": "solidjs",
+    "database": "postgres"
+  },
+  "supportedPlugins": [
+    "auth",
+    "email",
+    "analytics",
+    "file-upload",
+    "github-actions"
+  ]
+}

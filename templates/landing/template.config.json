@@ -1,0 +1,15 @@
+{
+  "name": "landing",
+  "description": "Marketing websites and product landing pages",
+  "stack": {
+    "runtime": "bun",
+    "frontend": "astro",
+    "css": "tailwindcss",
+    "interactivity": "alpinejs"
+  },
+  "supportedPlugins": [
+    "analytics",
+    "email",
+    "github-actions"
+  ]
+}
