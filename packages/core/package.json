@@ -4,11 +4,13 @@
   "type": "module",
   "main": "src/index.ts",
   "dependencies": {
-    "zod": "^3.22.4",
-    "glob": "latest",
+    "adm-zip": "^0.5.16",
+    "axios": "^1.13.6",
     "chalk": "latest",
+    "fs-extra": "latest",
+    "glob": "latest",
     "ora": "latest",
-    "fs-extra": "latest"
+    "zod": "^3.22.4"
   },
   "files": [
     "src",
@@ -16,5 +18,8 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7"
   }
 }

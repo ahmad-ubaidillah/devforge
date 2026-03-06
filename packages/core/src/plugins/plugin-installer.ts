@@ -9,11 +9,18 @@ export interface InstallResult {
   pluginName: string;
 }
 
+import { PluginRegistry } from '../utils/plugin-registry';
+
 export async function installPlugin(pluginName: string, projectDir: string, options?: { projectName?: string }): Promise<InstallResult> {
-  const pluginPath = join(process.cwd(), 'packages', 'plugins', pluginName);
+  let pluginPath = join(process.cwd(), 'packages', 'plugins', pluginName);
   
   if (!existsSync(pluginPath)) {
-    throw new Error(`Plugin "${pluginName}" not found at ${pluginPath}`);
+    console.log(`[INSTALL] Local plugin "${pluginName}" not found. Checking remote registry...`);
+    try {
+      pluginPath = await PluginRegistry.downloadPlugin(pluginName);
+    } catch (e: any) {
+      throw new Error(`Plugin "${pluginName}" not found locally or in the remote registry: ${e.message}`);
+    }
   }
 
   const config = loadPlugin(pluginPath);
