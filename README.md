@@ -50,14 +50,15 @@ DevForge is designed to be used via `npx` or `bunx` for zero-install scaffolding
 ### Create a New Project
 
 ```bash
-npx devforge-cli create my-awesome-app
+npx @ahmadubaidillah/cli create my-awesome-app
 ```
 
 ### Initialize Your Workspace (For Contributors)
 
 ```bash
 bun install
-bun devforge doctor
+bun run build
+bun x devforge-cli doctor
 ```
 
 ---
@@ -66,14 +67,14 @@ bun devforge doctor
 
 The DevForge CLI is your command center for project lifecycle management.
 
-| Command  | Usage                     | Description                                                      |
-| :------- | :------------------------ | :--------------------------------------------------------------- |
-| `create` | `devforge create [name]`  | Scaffold a new project from 8+ premium templates.                |
-| `add`    | `devforge add [plugin]`   | Inject a new feature (stripe, auth, cms) into your existing app. |
-| `list`   | `devforge list`           | View all available plugins and official templates.               |
-| `gain`   | `devforge gain --history` | **Cost Analytics**: View token savings and efficiency metrics.   |
-| `doctor` | `devforge doctor`         | Health check for your architecture and dependencies.             |
-| `ui`     | `devforge ui`             | Launch the local DevForge Design System builder.                 |
+| Command  | Usage                         | Description                                                      |
+| :------- | :---------------------------- | :--------------------------------------------------------------- |
+| `create` | `devforge-cli create [name]`  | Scaffold a new project from 8+ premium templates.                |
+| `add`    | `devforge-cli add [plugin]`   | Inject a new feature (stripe, auth, cms) into your existing app. |
+| `list`   | `devforge-cli list`           | View all available plugins and official templates.               |
+| `gain`   | `devforge-cli gain --history` | **Cost Analytics**: View token savings and efficiency metrics.   |
+| `doctor` | `devforge-cli doctor`         | Health check for your architecture and dependencies.             |
+| `ui`     | `devforge-cli ui`             | Launch the local DevForge Design System builder.                 |
 
 ---
 
@@ -88,7 +89,7 @@ DevForge agents use `rtk-filter` to ingest your code efficiently. You can influe
 _View your real-time performance with:_
 
 ```bash
-devforge gain
+devforge-cli gain
 ```
 
 ---
