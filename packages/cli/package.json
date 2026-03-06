@@ -1,6 +1,6 @@
 {
   "name": "@ahmadubaidillah/cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "bin": {
     "devforge-cli": "dist/bin.js"
@@ -16,6 +16,9 @@
     "dist",
     "README.md"
   ],
+  "scripts": {
+    "prepublishOnly": "npm pkg set dependencies.@ahmadubaidillah/core=\"^$npm_package_version\""
+  },
   "publishConfig": {
     "access": "public"
   }

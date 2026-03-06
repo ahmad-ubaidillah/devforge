@@ -14,7 +14,7 @@
     "build:cli": "cd packages/cli && bun build ./src/bin.ts --outdir ./dist --target node",
     "publish:all": "npm run publish:core && npm run publish:cli",
     "publish:core": "cd packages/core && npm publish --access public",
-    "publish:cli": "cd packages/cli && npm publish --access public"
+    "publish:cli": "npm pkg set dependencies.@ahmadubaidillah/core=\"^$(node -p \"require('./packages/core/package.json').version\")\" -w @ahmadubaidillah/cli && cd packages/cli && npm publish --access public"
   },
   "workspaces": [
     "packages/*",
