@@ -1,6 +1,6 @@
 {
   "name": "@ahmadubaidillah/cli",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "description": "The elite modular boilerplate engine for agentic applications.",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "devforge-cli": "dist/bin.js"
   },
   "dependencies": {
-    "@ahmadubaidillah/core": "^1.1.2",
+    "@ahmadubaidillah/core": "^1.1.5",
     "@inquirer/prompts": "latest",
     "chalk": "latest",
     "commander": "latest",

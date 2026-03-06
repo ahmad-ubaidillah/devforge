@@ -10,16 +10,67 @@ export interface InstallResult {
 }
 
 import { PluginRegistry } from '../utils/plugin-registry';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export function getPluginsRoot() {
+  const searchPaths = [
+    // 1. Try relative to the current file (bundled distribution)
+    join(__dirname, 'plugins'),
+    join(__dirname, '..', 'plugins'),
+    join(__dirname, '..', '..', 'plugins'),
+    // 2. Try Node Modules resolution
+    join(process.cwd(), 'node_modules', '@ahmadubaidillah', 'core', 'plugins'),
+    // 3. Local development fallback
+    join(process.cwd(), 'packages', 'plugins'),
+  ];
+
+  for (const p of searchPaths) {
+    if (existsSync(p)) {
+      // Basic validation: look for at least one core plugin
+      if (existsSync(join(p, 'auth'))) return p;
+    }
+  }
+
+  // 4. Aggressive Upward Search
+  let current = __dirname;
+  const root = '/';
+  while (current !== root) {
+    const p = join(current, 'plugins');
+    if (existsSync(p) && existsSync(join(p, 'auth'))) {
+      return p;
+    }
+    const parent = dirname(current);
+    if (parent === current) break;
+    current = parent;
+  }
+
+  return join(process.cwd(), 'packages', 'plugins');
+}
 
 export async function installPlugin(pluginName: string, projectDir: string, options?: { projectName?: string }): Promise<InstallResult> {
-  let pluginPath = join(process.cwd(), 'packages', 'plugins', pluginName);
+  // Aliases and normalization
+  const aliases: Record<string, string> = {
+    'payment': 'payments',
+    'file-upload': 'file_upload',
+    'file-uploads': 'file_upload',
+    'github-action': 'github-actions',
+    'deployment-vercel': 'deployment',
+  };
+
+  const normalizedName = aliases[pluginName] || pluginName;
+  const pluginsRoot = getPluginsRoot();
+  let pluginPath = join(pluginsRoot, normalizedName);
   
   if (!existsSync(pluginPath)) {
-    console.log(`[INSTALL] Local plugin "${pluginName}" not found. Checking remote registry...`);
+    console.log(`[INSTALL] Local plugin "${normalizedName}" not found. Checking remote registry...`);
     try {
-      pluginPath = await PluginRegistry.downloadPlugin(pluginName);
+      pluginPath = await PluginRegistry.downloadPlugin(normalizedName);
     } catch (e: any) {
-      throw new Error(`Plugin "${pluginName}" not found locally or in the remote registry: ${e.message}`);
+      throw new Error(`Plugin "${normalizedName}" not found locally or in the remote registry: ${e.message}`);
     }
   }
 

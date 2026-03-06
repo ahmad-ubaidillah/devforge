@@ -15,7 +15,7 @@
     "zod": "latest",
     "drizzle-orm": "latest",
     "postgres": "latest",
-    "@better-auth/hono": "latest"
+    "better-auth": "latest"
   },
   "devDependencies": {
     "drizzle-kit": "latest",

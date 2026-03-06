@@ -1,6 +1,6 @@
 {
   "name": "@ahmadubaidillah/core",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "description": "The scaffolding engine and RTK-AI efficiency layer for DevForge.",
   "type": "module",
   "main": "dist/index.js",
@@ -22,6 +22,7 @@
   "files": [
     "dist",
     "templates",
+    "plugins",
     "README.md"
   ],
   "publishConfig": {

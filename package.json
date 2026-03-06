@@ -1,6 +1,6 @@
 {
   "name": "devforge",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "private": false,
   "description": "The elite modular boilerplate ecosystem with agentic token optimization.",
   "repository": {
@@ -18,9 +18,10 @@
     "test:ui": "vitest --ui",
     "smoke": "bun run tests/smoke-test.ts",
     "bench": "bun run scripts/bench.ts",
-    "build": "bun run build:core && bun run build:cli",
-    "build:core": "bun build ./packages/core/src/index.ts --outdir ./packages/core/dist --target node",
-    "build:cli": "bun build ./packages/cli/src/bin.ts --outdir ./packages/cli/dist --target node && cp -r ./templates ./packages/cli/dist/templates",
+    "build": "bun run clean && bun run build:core && bun run build:cli",
+    "clean": "rm -rf packages/core/dist packages/cli/dist",
+    "build:core": "bun build ./packages/core/src/index.ts --outdir ./packages/core/dist --target node && mkdir -p ./packages/core/dist/plugins && cp -r ./packages/plugins/* ./packages/core/dist/plugins/",
+    "build:cli": "bun build ./packages/cli/src/bin.ts --outdir ./packages/cli/dist --target node && mkdir -p ./packages/cli/dist/templates && cp -r ./templates/* ./packages/cli/dist/templates/ && mkdir -p ./packages/cli/dist/plugins && cp -r ./packages/plugins/* ./packages/cli/dist/plugins/",
     "publish:all": "npm run publish:core && npm run publish:cli",
     "publish:core": "cd packages/core && npm publish --access public",
     "publish:cli": "npm pkg set dependencies.@ahmadubaidillah/core=\"^$(node -p \"require('./packages/core/package.json').version\")\" -w @ahmadubaidillah/cli && cd packages/cli && npm publish --access public"
