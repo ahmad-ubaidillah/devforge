@@ -1,22 +1,43 @@
-import { existsSync, readFileSync, writeFileSync, copyFileSync, readdirSync, rmSync, mkdirSync } from 'fs';
+import { existsSync, readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
-import { execSync } from 'child_process';
-import os from 'os';
+import { 
+  DiagnosticResult, 
+  checkSystemEnvironment, 
+  performFixes, 
+  checkProjectConfig 
+} from './doctor-checks';
 
-export interface DiagnosticResult {
-  issue: string;
-  severity: 'error' | 'warning' | 'info';
-  fix?: string;
-  details?: string;
-}
+export { DiagnosticResult };
 
 export function runDiagnostics(projectDir: string): DiagnosticResult[] {
   const results: DiagnosticResult[] = [];
   
-  // 0. Environment & Tooling (The "Flutter Doctor" style checks)
+  // 0. Environment & Tooling
   results.push(...checkSystemEnvironment());
 
   // 1. Check for .env.example vs .env
+  checkEnvFiles(projectDir, results);
+
+  // 2. Dependencies & Lockfiles
+  checkDependencies(projectDir, results);
+
+  // 3. Project Configuration
+  checkProjectConfig(projectDir, results);
+
+  // 4. Test Directory Structure
+  checkTestStructure(projectDir, results);
+
+  // 5. Cleanup checks
+  checkClutter(projectDir, results);
+
+  return results;
+}
+
+export function fixDiagnostics(projectDir: string, results: DiagnosticResult[]) {
+  return performFixes(projectDir, results);
+}
+
+function checkEnvFiles(projectDir: string, results: DiagnosticResult[]) {
   const envExamplePath = join(projectDir, '.env.example');
   const envPath = join(projectDir, '.env');
 
@@ -44,8 +65,9 @@ export function runDiagnostics(projectDir: string): DiagnosticResult[] {
       }
     } catch (e) { /* ignore */ }
   }
+}
 
-  // 2. Dependencies & Lockfiles
+function checkDependencies(projectDir: string, results: DiagnosticResult[]) {
   if (!existsSync(join(projectDir, 'node_modules'))) {
     results.push({
       issue: 'Dependencies not installed',
@@ -53,40 +75,23 @@ export function runDiagnostics(projectDir: string): DiagnosticResult[] {
       fix: 'bun install'
     });
   }
+}
 
-  // 3. Project Configuration (DevForge specific)
-  const pkgPath = join(projectDir, 'package.json');
-  if (existsSync(pkgPath)) {
-    try {
-      const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-      if (!pkg.dependencies?.['hono'] && !pkg.dependencies?.['astro']) {
-        results.push({
-          issue: 'Project does not appear to be a DevForge template',
-          severity: 'warning'
-        });
-      }
-    } catch (error: any) {
-      results.push({
-        issue: `Malformed package.json syntax: ${error.message}`,
-        severity: 'error'
-      });
-    }
-  }
-
-  // 4. Test Directory Structure
-  const rootDirs = readdirSync(projectDir, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
-
-  if (!rootDirs.includes('tests')) {
+function checkTestStructure(projectDir: string, results: DiagnosticResult[]) {
+  if (!existsSync(join(projectDir, 'tests'))) {
     results.push({
       issue: 'Missing centralized tests/ directory',
       severity: 'warning',
       fix: 'mkdir -p tests/{unit,smoke,integration}'
     });
   }
+}
 
-  // 5. Cleanup checks
+function checkClutter(projectDir: string, results: DiagnosticResult[]) {
+  const rootDirs = readdirSync(projectDir, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+
   const clutter = rootDirs.filter(d => d.startsWith('smoke-test-'));
   if (clutter.length > 0) {
     results.push({
@@ -96,101 +101,4 @@ export function runDiagnostics(projectDir: string): DiagnosticResult[] {
       details: clutter.join(', ')
     });
   }
-
-  return results;
 }
-
-function checkSystemEnvironment(): DiagnosticResult[] {
-  const envResults: DiagnosticResult[] = [];
-  
-  // OS Info
-  envResults.push({
-    issue: `Platform: ${os.platform()} (${os.release()})`,
-    severity: 'info',
-    details: `Arch: ${os.arch()}, CPU: ${os.cpus()[0]?.model}`
-  });
-
-  // Bun check
-  try {
-    const bunVer = execSync('bun --version').toString().trim();
-    envResults.push({
-      issue: `Bun version: ${bunVer}`,
-      severity: 'info'
-    });
-  } catch {
-    envResults.push({
-      issue: 'Bun is not installed',
-      severity: 'error',
-      fix: 'curl -fsSL https://bun.sh/install | bash'
-    });
-  }
-
-  // Node check
-  try {
-    const nodeVer = execSync('node --version').toString().trim();
-    envResults.push({
-      issue: `Node.js version: ${nodeVer}`,
-      severity: 'info'
-    });
-  } catch {
-    envResults.push({
-      issue: 'Node.js is not installed',
-      severity: 'warning'
-    });
-  }
-
-  // Git check
-  try {
-    const gitVer = execSync('git --version').toString().trim();
-    envResults.push({
-      issue: `Git version: ${gitVer}`,
-      severity: 'info'
-    });
-  } catch {
-    envResults.push({
-      issue: 'Git is not installed',
-      severity: 'warning'
-    });
-  }
-
-  return envResults;
-}
-
-export function fixDiagnostics(projectDir: string, results: DiagnosticResult[]) {
-  const fixesPerformed: string[] = [];
-  for (const r of results) {
-    if (!r.fix) continue;
-    try {
-      if (r.issue.includes('Missing .env file')) {
-        copyFileSync(join(projectDir, '.env.example'), join(projectDir, '.env'));
-        fixesPerformed.push('Created .env from .env.example');
-      } else if (r.issue.includes('Missing keys in .env')) {
-        const exampleContent = readFileSync(join(projectDir, '.env.example'), 'utf8');
-        const envContent = readFileSync(join(projectDir, '.env'), 'utf8');
-        let newEnv = envContent;
-        exampleContent.split('\n').forEach(line => {
-          const key = line.split('=')[0].trim();
-          if (key && !key.startsWith('#') && !envContent.includes(`${key}=`)) newEnv += `\n${line}`;
-        });
-        writeFileSync(join(projectDir, '.env'), newEnv);
-        fixesPerformed.push('Fixed .env keys');
-      } else if (r.issue.includes('Root directory cluttered')) {
-        execSync('rm -rf smoke-test-*', { cwd: projectDir });
-        fixesPerformed.push('Cleaned root clutter');
-      } else if (r.issue.includes('Missing centralized tests/ directory')) {
-        const testBase = join(projectDir, 'tests');
-        if (!existsSync(testBase)) {
-          mkdirSync(testBase);
-          mkdirSync(join(testBase, 'unit'));
-          mkdirSync(join(testBase, 'smoke'));
-          mkdirSync(join(testBase, 'integration'));
-          fixesPerformed.push('Created tests/ structure');
-        }
-      }
-    } catch (e: any) {
-      console.error(`Fix failed: ${e.message}`);
-    }
-  }
-  return fixesPerformed;
-}
-

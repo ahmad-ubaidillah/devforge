@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { StripeService } from '../services/stripe.service';
+import { checkoutSchema } from '../billing.schema';
 
 export const billingRoutes = new Hono<{
   Variables: {
@@ -29,7 +30,11 @@ billingRoutes.post('/webhook', async (c) => {
 });
 
 billingRoutes.post('/checkout', async (c) => {
-  const { priceId } = await c.req.json();
+  const body = await c.req.json();
+  const result = checkoutSchema.safeParse(body);
+  if (!result.success) return c.json({ error: result.error.format() }, 400);
+
+  const { priceId } = body;
   const organizationId = c.get('organizationId');
   if (!organizationId) {
     return c.json({ error: 'Unauthorized: organizationId is required' }, 401);

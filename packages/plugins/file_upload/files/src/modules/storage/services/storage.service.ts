@@ -9,21 +9,31 @@ export class StorageService {
   }
 
   async getUploadUrl(bucket: string, key: string, expiresIn: number = 3600) {
-    const command = new PutObjectCommand({
-      Bucket: bucket,
-      Key: key,
-    });
+    try {
+      const command = new PutObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      });
 
-    return await getSignedUrl(this.client, command, { expiresIn });
+      return await getSignedUrl(this.client, command, { expiresIn });
+    } catch (error: any) {
+      console.error(`[StorageService] Failed to get upload URL: ${error.message}`);
+      throw error;
+    }
   }
 
   async uploadFile(bucket: string, key: string, body: Buffer | Uint8Array | string) {
-    const command = new PutObjectCommand({
-      Bucket: bucket,
-      Key: key,
-      Body: body,
-    });
+    try {
+      const command = new PutObjectCommand({
+        Bucket: bucket,
+        Key: key,
+        Body: body,
+      });
 
-    return await this.client.send(command);
+      return await this.client.send(command);
+    } catch (error: any) {
+      console.error(`[StorageService] File upload failed: ${error.message}`);
+      throw error;
+    }
   }
 }

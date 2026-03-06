@@ -21,39 +21,51 @@ export class AnalyticsService {
    * Capture a custom event.
    */
   async capture(distinctId: string, event: string, properties?: Record<string, any>) {
-    if (!this.client) {
-      console.log(`[Analytics Mock] Event: ${event} for ${distinctId}`, properties);
-      return;
-    }
+    try {
+      if (!this.client) {
+        console.log(`[Analytics Mock] Event: ${event} for ${distinctId}`, properties);
+        return;
+      }
 
-    this.client.capture({
-      distinctId,
-      event,
-      properties,
-    });
+      this.client.capture({
+        distinctId,
+        event,
+        properties,
+      });
+    } catch (error: any) {
+      console.error(`[AnalyticsService] Capture failed: ${error.message}`);
+    }
   }
 
   /**
    * Identify a user with custom traits.
    */
   async identify(distinctId: string, properties: Record<string, any>) {
-    if (!this.client) {
-      console.log(`[Analytics Mock] Identify: ${distinctId}`, properties);
-      return;
-    }
+    try {
+      if (!this.client) {
+        console.log(`[Analytics Mock] Identify: ${distinctId}`, properties);
+        return;
+      }
 
-    this.client.identify({
-      distinctId,
-      properties,
-    });
+      this.client.identify({
+        distinctId,
+        properties,
+      });
+    } catch (error: any) {
+      console.error(`[AnalyticsService] Identify failed: ${error.message}`);
+    }
   }
 
   /**
    * Flush pending events (useful for serverless environments).
    */
   async flush() {
-    if (this.client) {
-      await this.client.flush();
+    try {
+      if (this.client) {
+        await this.client.flush();
+      }
+    } catch (error: any) {
+      console.error(`[AnalyticsService] Flush failed: ${error.message}`);
     }
   }
 }

@@ -38,15 +38,24 @@ export class QueueService {
    * Enqueue a job to be processed in the background
    */
   async addJob(name: string, data: any, opts?: any) {
-    return await this.queue.add(name, data, opts);
+    try {
+      return await this.queue.add(name, data, opts);
+    } catch (error: any) {
+      console.error(`[QueueService] Failed to add job ${name}: ${error.message}`);
+      throw error;
+    }
   }
 
   /**
    * Gracefully close connections
    */
   async close() {
-    await this.worker.close();
-    await this.queue.close();
-    await this.redis.quit();
+    try {
+      await this.worker.close();
+      await this.queue.close();
+      await this.redis.quit();
+    } catch (error: any) {
+      console.error(`[QueueService] Failed to close connections: ${error.message}`);
+    }
   }
 }

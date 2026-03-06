@@ -14,15 +14,30 @@ export class MeiliSearchDriver implements SearchDriver {
   }
 
   async search(index: string, query: string, options: any = {}) {
-    return await this.client.index(index).search(query, options);
+    try {
+      return await this.client.index(index).search(query, options);
+    } catch (error: any) {
+      console.error(`[MeiliSearchDriver] Search failed for index ${index}: ${error.message}`);
+      throw error;
+    }
   }
 
   async addDocuments(index: string, documents: any[]) {
-    return await this.client.index(index).addDocuments(documents);
+    try {
+      return await this.client.index(index).addDocuments(documents);
+    } catch (error: any) {
+      console.error(`[MeiliSearchDriver] Add documents failed for index ${index}: ${error.message}`);
+      throw error;
+    }
   }
 
   async deleteDocuments(index: string, documentIds: string[] | number[]) {
-    return await this.client.index(index).deleteDocuments(documentIds);
+    try {
+      return await this.client.index(index).deleteDocuments(documentIds);
+    } catch (error: any) {
+      console.error(`[MeiliSearchDriver] Delete documents failed for index ${index}: ${error.message}`);
+      throw error;
+    }
   }
 }
 

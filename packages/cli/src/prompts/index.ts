@@ -1,4 +1,4 @@
-import { select, checkbox } from '@inquirer/prompts';
+import { select, checkbox, input } from '@inquirer/prompts';
 
 export const promptTemplate = async () => {
   return await select({
@@ -21,5 +21,12 @@ export const promptPlugins = async (availablePlugins: string[]) => {
   return await checkbox({
     message: 'Select plugins to include:',
     choices: availablePlugins.map((plugin) => ({ name: plugin, value: plugin })),
+  });
+};
+
+export const promptAgentKey = async () => {
+  return await input({
+    message: 'Enter Agent Activation Key (Premium):',
+    validate: (value) => value.length > 0 || 'Key is required for premium agent system.',
   });
 };

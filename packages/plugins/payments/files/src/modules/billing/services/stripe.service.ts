@@ -10,23 +10,38 @@ export class StripeService {
   }
 
   async createCheckoutSession(customerId: string, priceId: string) {
-    return await this.stripe.checkout.sessions.create({
-      customer: customerId,
-      line_items: [{ price: priceId, quantity: 1 }],
-      mode: 'subscription',
-      success_url: '{{SUCCESS_URL}}',
-      cancel_url: '{{CANCEL_URL}}',
-    });
+    try {
+      return await this.stripe.checkout.sessions.create({
+        customer: customerId,
+        line_items: [{ price: priceId, quantity: 1 }],
+        mode: 'subscription',
+        success_url: '{{SUCCESS_URL}}',
+        cancel_url: '{{CANCEL_URL}}',
+      });
+    } catch (error: any) {
+      console.error(`[StripeService] Checkout session failed: ${error.message}`);
+      throw error;
+    }
   }
 
   async createBillingPortal(customerId: string) {
-    return await this.stripe.billingPortal.sessions.create({
-      customer: customerId,
-      return_url: '{{RETURN_URL}}',
-    });
+    try {
+      return await this.stripe.billingPortal.sessions.create({
+        customer: customerId,
+        return_url: '{{RETURN_URL}}',
+      });
+    } catch (error: any) {
+      console.error(`[StripeService] Billing portal creation failed: ${error.message}`);
+      throw error;
+    }
   }
 
   async handleWebhook(body: string, signature: string, secret: string) {
-    return this.stripe.webhooks.constructEvent(body, signature, secret);
+    try {
+      return this.stripe.webhooks.constructEvent(body, signature, secret);
+    } catch (error: any) {
+      console.error(`[StripeService] Webhook construction failed: ${error.message}`);
+      throw error;
+    }
   }
 }

@@ -11,36 +11,46 @@ export class CMSService {
 
   // --- Posts ---
   async getPosts(organizationId: string, options: { categorySlug?: string } = {}) {
-    let query = this.db.select().from(posts).where(eq(posts.organizationId, organizationId));
-    
-    if (options.categorySlug) {
-      const cat = await this.getCategoryBySlug(options.categorySlug, organizationId);
-      if (cat) {
-        query = this.db.select().from(posts).where(
-          and(eq(posts.organizationId, organizationId), eq(posts.categoryId, cat.id))
-        );
+    try {
+      let query = this.db.select().from(posts).where(eq(posts.organizationId, organizationId));
+      
+      if (options.categorySlug) {
+        const cat = await this.getCategoryBySlug(options.categorySlug, organizationId);
+        if (cat) {
+          query = this.db.select().from(posts).where(
+            and(eq(posts.organizationId, organizationId), eq(posts.categoryId, cat.id))
+          );
+        }
       }
+      
+      return await query;
+    } catch (error: any) {
+      console.error(`[CMSService] Failed to fetch posts: ${error.message}`);
+      throw error;
     }
-    
-    return await query;
   }
 
   async createPost(data: any, organizationId: string) {
-    const { tagIds, ...postData } = data;
-    const [post] = await this.db.insert(posts).values({
-      ...postData,
-      organizationId,
-    }).returning();
+    try {
+      const { tagIds, ...postData } = data;
+      const [post] = await this.db.insert(posts).values({
+        ...postData,
+        organizationId,
+      }).returning();
 
-    if (tagIds && tagIds.length > 0) {
-      await this.db.insert(postTags).values(
-        tagIds.map((tagId: string) => ({ postId: post.id, tagId }))
-      );
+      if (tagIds && tagIds.length > 0) {
+        await this.db.insert(postTags).values(
+          tagIds.map((tagId: string) => ({ postId: post.id, tagId }))
+        );
+      }
+      
+      eventBus.dispatch('cms.post.created', { post, organizationId });
+
+      return post;
+    } catch (error: any) {
+      console.error(`[CMSService] Post creation failed: ${error.message}`);
+      throw error;
     }
-    
-    eventBus.dispatch('cms.post.created', { post, organizationId });
-
-    return post;
   }
 
   // --- Categories ---
@@ -49,10 +59,15 @@ export class CMSService {
   }
 
   async createCategory(data: any, organizationId: string) {
-    return await this.db.insert(categories).values({
-      ...data,
-      organizationId,
-    }).returning();
+    try {
+      return await this.db.insert(categories).values({
+        ...data,
+        organizationId,
+      }).returning();
+    } catch (error: any) {
+      console.error(`[CMSService] Category creation failed: ${error.message}`);
+      throw error;
+    }
   }
 
   async getCategoryBySlug(slug: string, organizationId: string) {

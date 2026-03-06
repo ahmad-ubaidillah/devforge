@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { CMSService } from '../services/cms.service';
+import { postSchema, categorySchema, tagSchema } from '../cms.schema';
 
 export const cmsRoutes = new Hono<{
   Variables: {
@@ -19,6 +20,8 @@ cmsRoutes.get('/posts', async (c) => {
 cmsRoutes.post('/posts', async (c) => {
   const cmsService = new CMSService(c.get('db'));
   const body = await c.req.json();
+  const result = postSchema.safeParse(body);
+  if (!result.success) return c.json({ error: result.error.format() }, 400);
   const post = await cmsService.createPost(body, c.get('organizationId'));
   return c.json({ post });
 });
@@ -33,6 +36,8 @@ cmsRoutes.get('/categories', async (c) => {
 cmsRoutes.post('/categories', async (c) => {
   const cmsService = new CMSService(c.get('db'));
   const body = await c.req.json();
+  const result = categorySchema.safeParse(body);
+  if (!result.success) return c.json({ error: result.error.format() }, 400);
   const category = await cmsService.createCategory(body, c.get('organizationId'));
   return c.json({ category });
 });
@@ -47,6 +52,8 @@ cmsRoutes.get('/tags', async (c) => {
 cmsRoutes.post('/tags', async (c) => {
   const cmsService = new CMSService(c.get('db'));
   const body = await c.req.json();
+  const result = tagSchema.safeParse(body);
+  if (!result.success) return c.json({ error: result.error.format() }, 400);
   const tag = await cmsService.createTag(body, c.get('organizationId'));
   return c.json({ tag });
 });
