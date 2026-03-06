@@ -38,13 +38,13 @@
       },
     },
     "packages/cli": {
-      "name": "@devforge/cli",
+      "name": "@ahmad-ubaidillah/cli",
       "version": "1.0.0",
       "bin": {
-        "devforge-cli": "./src/index.ts",
+        "devforge-cli": "./src/bin.ts",
       },
       "dependencies": {
-        "@devforge/core": "workspace:*",
+        "@ahmad-ubaidillah/core": "workspace:*",
         "@inquirer/prompts": "latest",
         "chalk": "latest",
         "commander": "latest",
@@ -52,7 +52,7 @@
       },
     },
     "packages/core": {
-      "name": "@devforge/core",
+      "name": "@ahmad-ubaidillah/core",
       "version": "1.0.0",
       "dependencies": {
         "adm-zip": "^0.5.16",
@@ -91,6 +91,10 @@
     },
   },
   "packages": {
+    "@ahmad-ubaidillah/cli": ["@ahmad-ubaidillah/cli@workspace:packages/cli"],
+
+    "@ahmad-ubaidillah/core": ["@ahmad-ubaidillah/core@workspace:packages/core"],
+
     "@asteasolutions/zod-to-openapi": ["@asteasolutions/zod-to-openapi@8.4.3", "", { "dependencies": { "openapi3-ts": "^4.1.2" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-lwfMTN7kDbFDwMniYZUebiGGHxVGBw9ZSI4IBYjm6Ey22Kd5z/fsQb2k+Okr8WMbCCC553vi/ZM9utl5/XcvuQ=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
@@ -144,10 +148,6 @@
     "@better-auth/utils": ["@better-auth/utils@0.3.1", "", {}, "sha512-+CGp4UmZSUrHHnpHhLPYu6cV+wSUSvVbZbNykxhUDocpVNTo9uFFxw/NqJlh1iC4wQ9HKKWGCKuZ5wUgS0v6Kg=="],
 
     "@better-fetch/fetch": ["@better-fetch/fetch@1.1.21", "", {}, "sha512-/ImESw0sskqlVR94jB+5+Pxjf+xBwDZF/N5+y2/q4EqD7IARUTSpPfIo8uf39SYpCxyOCtbyYpUrZ3F/k0zT4A=="],
-
-    "@devforge/cli": ["@devforge/cli@workspace:packages/cli"],
-
-    "@devforge/core": ["@devforge/core@workspace:packages/core"],
 
     "@devforge/gui": ["@devforge/gui@workspace:packages/gui"],
 

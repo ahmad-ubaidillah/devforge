@@ -50,7 +50,7 @@ export async function scaffold(options: ScaffoldInput) {
   if (withAgents) {
     // Security Check: Verify Agent Key
     // DevForge Master Key: DF-AGENT-2026-X (for demo)
-    const SECRET_KEY = process.env.DEVFORGE_AGENT_KEY || 'DF-AGENT-2026-X';
+    const SECRET_KEY = process.env.DEVFORGE_AGENT_KEY;
     
     if (agentKey !== SECRET_KEY) {
       throw new DevForgeError('Unauthorized: Invalid Agent Activation Key.', 'AUTH_FAILED');

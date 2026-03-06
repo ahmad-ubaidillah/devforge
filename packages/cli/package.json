@@ -1,5 +1,5 @@
 {
-  "name": "@devforge/cli",
+  "name": "@ahmad-ubaidillah/cli",
   "version": "1.0.0",
   "type": "module",
   "bin": {
@@ -10,7 +10,7 @@
     "chalk": "latest",
     "commander": "latest",
     "ora": "latest",
-    "@devforge/core": "workspace:*"
+    "@ahmad-ubaidillah/core": "workspace:*"
   },
   "files": [
     "src",
