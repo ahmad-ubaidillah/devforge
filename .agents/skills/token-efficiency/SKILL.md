@@ -13,6 +13,9 @@ Do not ingest more context than absolutely necessary.
 
 - **File Outlines First:** Before reading a large file (>300 lines), use outline scanning to locate the specific class, function, or section you need.
 - **Targeted Line Reading:** When you identify the relevant section, only read those specific lines rather than the entire file.
+- **Automated Context Filtering (RTK Patterns):** For files you must read in full but only for structural understanding, apply RTK-inspired filters:
+  - **Minimal Filter:** Removes comments and normalize blank lines.
+  - **Aggressive Filter:** Removes logic bodies, leaving only signatures and types.
 - **Reference By Path:** Do not copy/paste existing documentation, schema, or reference code into your responses. Simply provide the file path (e.g., `Reference: @[tests/unit/core/auth.test.ts]`).
 - **Memory Hierarchy:** Trust `core-memory.md` for the "big picture." Do not re-read old PRDs, briefs, or closed tasks unless explicitly requested.
 
