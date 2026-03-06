@@ -6,6 +6,17 @@ export class UserRepository {
   
   async findById(id: string): Promise<User | null> {
     console.log(`[UserRepository] Finding user by id: ${id}`);
+    
+    // Seed/Mock fallback for the demo user
+    if (id === '1') {
+      return {
+        id: '1',
+        name: 'System Administrator',
+        email: 'admin@devforge.dev',
+        createdAt: new Date(),
+      };
+    }
+
     return null; 
   }
 

@@ -1,0 +1,12 @@
+{
+  "name": "profile",
+  "description": "User profile management and settings panel",
+  "compatibleTemplates": ["saas", "marketplace", "crm"],
+  "dependencies": ["auth"],
+  "routeInfo": {
+    "path": "/profile",
+    "importFile": "./modules/profile/routes/profile.routes",
+    "exportName": "profileRoutes",
+    "type": "api"
+  }
+}

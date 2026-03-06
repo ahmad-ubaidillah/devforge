@@ -142,17 +142,21 @@ export async function installPlugin(pluginName: string, projectDir: string, opti
         appContent = importStmt + appContent;
       }
 
-      // Add Route under the injection point (Regex handles cases with trailing text/comments)
-      const routeStmt = `api.route('${config.routeInfo.path}', ${config.routeInfo.exportName});\n`;
+      // Add Route under the appropriate injection point
+      const isUI = config.routeInfo.type === 'ui';
+      const targetInstance = isUI ? 'app' : 'api';
+      const marker = isUI ? '// [PLUGIN_UI_INJECTION_POINT]' : '// [PLUGIN_ROUTES_INJECTION_POINT]';
+      const injectionRegex = new RegExp(`${marker.replace('[', '\\[').replace(']', '\\]')}.*$`, 'm');
+      
+      const routeStmt = `${targetInstance}.route('${config.routeInfo.path}', ${config.routeInfo.exportName});\n`;
+      
       if (!appContent.includes(routeStmt)) {
-        const marker = '// [PLUGIN_ROUTES_INJECTION_POINT]';
-        const injectionRegex = /\/\/ \[PLUGIN_ROUTES_INJECTION_POINT\].*$/m;
-        
         if (injectionRegex.test(appContent)) {
           appContent = appContent.replace(injectionRegex, `${marker}\n${routeStmt}`);
         } else {
-          // Fallback if marker is missing: add to end of file (less ideal but better than failing)
-          appContent += `\n// Auto-injected route\napi.route('${config.routeInfo.path}', ${config.routeInfo.exportName});\n`;
+          // Fallback if marker is missing: add to end of file
+          const fallbackInstance = appContent.includes('const api =') ? 'api' : 'app';
+          appContent += `\n// Auto-injected route\n${fallbackInstance}.route('${config.routeInfo.path}', ${config.routeInfo.exportName});\n`;
         }
       }
 

@@ -1,0 +1,15 @@
+{
+  "name": "invitations",
+  "description": "Multi-tenant team invitation system",
+  "compatibleTemplates": ["saas", "marketplace", "crm"],
+  "dependencies": ["auth"],
+  "packageDependencies": {
+    "resend": "latest"
+  },
+  "routeInfo": {
+    "path": "/invites",
+    "importFile": "./modules/invitations/routes/invitation.routes",
+    "exportName": "invitationRoutes",
+    "type": "api"
+  }
+}

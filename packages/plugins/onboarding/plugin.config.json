@@ -1,0 +1,14 @@
+{
+  "name": "onboarding",
+  "description": "Interactive user onboarding tours using driver.js",
+  "compatibleTemplates": ["saas", "marketplace", "crm"],
+  "packageDependencies": {
+    "driver.js": "latest"
+  },
+  "routeInfo": {
+    "path": "/onboarding",
+    "importFile": "./modules/onboarding/routes/onboarding.routes",
+    "exportName": "onboardingRoutes",
+    "type": "api"
+  }
+}

@@ -10,6 +10,7 @@
   "routeInfo": {
     "path": "/admin",
     "importFile": "./modules/admin/routes/admin.routes",
-    "exportName": "adminRoutes"
+    "exportName": "adminRoutes",
+    "type": "ui"
   }
 }

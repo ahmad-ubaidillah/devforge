@@ -23,6 +23,8 @@ Unlike monolithic boilerplates, DevForge is built on a **Lego-like plugin system
 - **Search**: Unified Meilisearch abstraction.
 - **Analytics**: Server-side PostHog event tracking.
 - **Queue**: BullMQ + Redis task processing.
+- **Onboarding**: Interactive user tours with `driver.js`.
+- **Invitations**: Multi-tenant team collab flows via `resend`.
 
 ### 🧠 2. Agentic Optimization (The "Special Sauce")
 
@@ -67,14 +69,15 @@ bun x devforge-cli doctor
 
 The DevForge CLI is your command center for project lifecycle management.
 
-| Command  | Usage                         | Description                                                      |
-| :------- | :---------------------------- | :--------------------------------------------------------------- |
-| `create` | `devforge-cli create [name]`  | Scaffold a new project from 8+ premium templates.                |
-| `add`    | `devforge-cli add [plugin]`   | Inject a new feature (stripe, auth, cms) into your existing app. |
-| `list`   | `devforge-cli list`           | View all available plugins and official templates.               |
-| `gain`   | `devforge-cli gain --history` | **Cost Analytics**: View token savings and efficiency metrics.   |
-| `doctor` | `devforge-cli doctor`         | Health check for your architecture and dependencies.             |
-| `ui`     | `devforge-cli ui`             | Launch the local DevForge Design System builder.                 |
+| Command    | Usage                          | Description                                                      |
+| :--------- | :----------------------------- | :--------------------------------------------------------------- |
+| `create`   | `devforge-cli create [name]`   | Scaffold a new project from 8+ premium templates.                |
+| `add`      | `devforge-cli add [plugin]`    | Inject a new feature (stripe, auth, cms) into your existing app. |
+| `scaffold` | `devforge-cli scaffold [name]` | **New**: Instantly generate CRUD layers (Service/Repo/Route).    |
+| `list`     | `devforge-cli list`            | View all available plugins and official templates.               |
+| `gain`     | `devforge-cli gain --history`  | **Cost Analytics**: View token savings and efficiency metrics.   |
+| `doctor`   | `devforge-cli doctor`          | Health check for your architecture and dependencies.             |
+| `ui`       | `devforge-cli ui`              | Launch the local DevForge Design System builder.                 |
 
 ---
 

@@ -19,6 +19,8 @@ app.get('/', (c) => {
   return c.html(<LandingPage projectName="{{PROJECT_NAME}}" />);
 });
 
+// [PLUGIN_UI_INJECTION_POINT]
+
 // Feature Routes (Registry)
 const api = new Hono();
 api.route('/users', userRoutes);

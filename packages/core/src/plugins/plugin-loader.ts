@@ -13,6 +13,7 @@ export const PluginConfigSchema = z.object({
     path: z.string(),
     importFile: z.string(),
     exportName: z.string(),
+    type: z.enum(['api', 'ui']).default('api'),
   }).optional(),
 });
 

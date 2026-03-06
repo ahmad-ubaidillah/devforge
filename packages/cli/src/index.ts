@@ -9,6 +9,7 @@ import { registerAICommand } from './commands/ai';
 import { registerDoctorCommand } from './commands/doctor';
 
 import { registerGainCommand } from './commands/gain';
+import { registerScaffoldCommand } from './commands/scaffold';
 
 export function createProgram() {
   const program = new Command();
@@ -27,6 +28,7 @@ export function createProgram() {
   registerAICommand(program);
   registerDoctorCommand(program);
   registerGainCommand(program);
+  registerScaffoldCommand(program);
 
   return program;
 }
