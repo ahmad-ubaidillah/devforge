@@ -1,6 +1,6 @@
 {
   "name": "devforge",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "private": false,
   "description": "The elite modular boilerplate ecosystem with agentic token optimization.",
   "repository": {
@@ -19,8 +19,8 @@
     "smoke": "bun run tests/smoke-test.ts",
     "bench": "bun run scripts/bench.ts",
     "build": "bun run build:core && bun run build:cli",
-    "build:core": "cd packages/core && bun build ./src/index.ts --outdir ./dist --target node",
-    "build:cli": "cd packages/cli && bun build ./src/bin.ts --outdir ./dist --target node",
+    "build:core": "bun build ./packages/core/src/index.ts --outdir ./packages/core/dist --target node",
+    "build:cli": "bun build ./packages/cli/src/bin.ts --outdir ./packages/cli/dist --target node && cp -r ./templates ./packages/cli/dist/templates",
     "publish:all": "npm run publish:core && npm run publish:cli",
     "publish:core": "cd packages/core && npm publish --access public",
     "publish:cli": "npm pkg set dependencies.@ahmadubaidillah/core=\"^$(node -p \"require('./packages/core/package.json').version\")\" -w @ahmadubaidillah/cli && cd packages/cli && npm publish --access public"

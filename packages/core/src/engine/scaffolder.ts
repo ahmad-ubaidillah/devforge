@@ -10,27 +10,40 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export function getTemplatesRoot() {
-  // 1. Check if we are in a published environment (inside node_modules)
-  // The structure is usually node_modules/@ahmadubaidillah/core/dist/index.js
-  const publishedPath = join(__dirname, '..', 'templates');
-  if (existsSync(publishedPath)) return publishedPath;
-
-  // 2. Check for monorepo development (relative to CLI or Core)
-  const devPaths = [
-    join(process.cwd(), 'templates'),                       // Project root
-    join(__dirname, '..', '..', '..', 'templates'),        // From packages/core/dist
-    join(__dirname, '..', '..', '..', '..', 'templates'),   // From packages/cli/dist
+  const searchPaths = [
+    // 1. Try relative to the current file (dist or src)
+    join(__dirname, 'templates'),
+    join(__dirname, '..', 'templates'),
+    join(__dirname, '..', '..', 'templates'),
+    join(__dirname, '..', '..', '..', 'templates'),
+    join(__dirname, '..', '..', '..', '..', 'templates'),
+    // 2. Try Node Modules resolution (if not bundled)
+    join(process.cwd(), 'node_modules', '@ahmadubaidillah', 'core', 'templates'),
+    // 3. Local development fallback
+    join(process.cwd(), 'templates'),
   ];
 
-  for (const p of devPaths) {
+  for (const p of searchPaths) {
     if (existsSync(p)) {
-      // Basic validation: must contain at least one template directory
       const saasCheck = join(p, 'saas', 'template.config.json');
       if (existsSync(saasCheck)) return p;
     }
   }
 
-  // 3. Final Fallback: Try to find templates sibling to node_modules
+  // 4. Aggressive Upward Search
+  let current = __dirname;
+  const root = '/';
+  while (current !== root) {
+    const p = join(current, 'templates');
+    if (existsSync(p) && existsSync(join(p, 'saas', 'template.config.json'))) {
+      return p;
+    }
+    const parent = dirname(current);
+    if (parent === current) break;
+    current = parent;
+  }
+
+  // Final absolute fallback for error reporting
   return join(process.cwd(), 'templates');
 }
 
