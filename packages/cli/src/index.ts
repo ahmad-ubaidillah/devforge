@@ -8,6 +8,8 @@ import { registerListCommand } from './commands/list';
 import { registerAICommand } from './commands/ai';
 import { registerDoctorCommand } from './commands/doctor';
 
+import { registerGainCommand } from './commands/gain';
+
 export function createProgram() {
   const program = new Command();
 
@@ -24,6 +26,7 @@ export function createProgram() {
   registerCreatePluginCommand(program);
   registerAICommand(program);
   registerDoctorCommand(program);
+  registerGainCommand(program);
 
   return program;
 }

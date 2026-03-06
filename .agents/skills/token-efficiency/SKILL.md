@@ -16,6 +16,9 @@ Do not ingest more context than absolutely necessary.
 - **Automated Context Filtering (RTK Patterns):** For files you must read in full but only for structural understanding, apply RTK-inspired filters:
   - **Minimal Filter:** Removes comments and normalize blank lines.
   - **Aggressive Filter:** Removes logic bodies, leaving only signatures and types.
+- **Semantic Memory Pruning (Facts vs. History):** Instead of reciting full `tasks.md` history, prioritize fragmented **Facts**.
+  - **Fact Extraction:** Before answering, extract the 3–5 most relevant facts/decisions from the project store.
+  - **Exclude Monoliths:** Do not read the entire `core-memory.md` or `tasks.md` if the specific task is isolated to a single component.
 - **Reference By Path:** Do not copy/paste existing documentation, schema, or reference code into your responses. Simply provide the file path (e.g., `Reference: @[tests/unit/core/auth.test.ts]`).
 - **Memory Hierarchy:** Trust `core-memory.md` for the "big picture." Do not re-read old PRDs, briefs, or closed tasks unless explicitly requested.
 
