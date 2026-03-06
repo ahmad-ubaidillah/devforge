@@ -38,13 +38,13 @@
       },
     },
     "packages/cli": {
-      "name": "@ahmad-ubaidillah/cli",
+      "name": "@ahmadubaidillah/cli",
       "version": "1.0.0",
       "bin": {
-        "devforge-cli": "./src/bin.ts",
+        "devforge-cli": "./dist/bin.js",
       },
       "dependencies": {
-        "@ahmad-ubaidillah/core": "workspace:*",
+        "@ahmadubaidillah/core": "workspace:*",
         "@inquirer/prompts": "latest",
         "chalk": "latest",
         "commander": "latest",
@@ -52,7 +52,7 @@
       },
     },
     "packages/core": {
-      "name": "@ahmad-ubaidillah/core",
+      "name": "@ahmadubaidillah/core",
       "version": "1.0.0",
       "dependencies": {
         "adm-zip": "^0.5.16",
@@ -91,9 +91,9 @@
     },
   },
   "packages": {
-    "@ahmad-ubaidillah/cli": ["@ahmad-ubaidillah/cli@workspace:packages/cli"],
+    "@ahmadubaidillah/cli": ["@ahmadubaidillah/cli@workspace:packages/cli"],
 
-    "@ahmad-ubaidillah/core": ["@ahmad-ubaidillah/core@workspace:packages/core"],
+    "@ahmadubaidillah/core": ["@ahmadubaidillah/core@workspace:packages/core"],
 
     "@asteasolutions/zod-to-openapi": ["@asteasolutions/zod-to-openapi@8.4.3", "", { "dependencies": { "openapi3-ts": "^4.1.2" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-lwfMTN7kDbFDwMniYZUebiGGHxVGBw9ZSI4IBYjm6Ey22Kd5z/fsQb2k+Okr8WMbCCC553vi/ZM9utl5/XcvuQ=="],
 

@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import { TokenTracker } from '@ahmad-ubaidillah/core/src/utils/token-tracker';
+import { TokenTracker } from '@ahmadubaidillah/core/src/utils/token-tracker';
 import chalk from 'chalk';
 
 export function registerGainCommand(program: Command) {
