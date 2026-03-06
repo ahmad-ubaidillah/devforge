@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bun run --hot src/app.ts",
-    "start": "bun run src/app.ts",
-    "build": "bun build ./src/app.ts --outdir ./dist",
+    "dev": "bun run --hot src/app.tsx",
+    "start": "bun run src/app.tsx",
+    "build": "bun build ./src/app.tsx --outdir ./dist",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "test:e2e": "playwright test"

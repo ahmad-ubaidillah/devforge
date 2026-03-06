@@ -5,5 +5,10 @@
   "packageDependencies": {
     "drizzle-orm": "latest"
   },
-  "pluginDependencies": ["auth", "file_upload"]
+  "pluginDependencies": ["auth", "file_upload"],
+  "routeInfo": {
+    "path": "/cms",
+    "importFile": "./modules/cms/routes/cms.routes",
+    "exportName": "cmsRoutes"
+  }
 }

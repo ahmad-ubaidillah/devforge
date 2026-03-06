@@ -127,6 +127,39 @@ export async function installPlugin(pluginName: string, projectDir: string, opti
     }
   }
 
+  // 3. Automatic Route Injection (Registry)
+  if (config.routeInfo) {
+    const appPathTsx = join(projectDir, 'src', 'app.tsx');
+    const appPathTs = join(projectDir, 'src', 'app.ts');
+    const appPath = existsSync(appPathTsx) ? appPathTsx : (existsSync(appPathTs) ? appPathTs : null);
+
+    if (appPath) {
+      let appContent = readFileSync(appPath, 'utf8');
+      
+      // Add Import
+      const importStmt = `import { ${config.routeInfo.exportName} } from '${config.routeInfo.importFile}';\n`;
+      if (!appContent.includes(config.routeInfo.importFile)) {
+        appContent = importStmt + appContent;
+      }
+
+      // Add Route under the injection point (Regex handles cases with trailing text/comments)
+      const routeStmt = `api.route('${config.routeInfo.path}', ${config.routeInfo.exportName});\n`;
+      if (!appContent.includes(routeStmt)) {
+        const marker = '// [PLUGIN_ROUTES_INJECTION_POINT]';
+        const injectionRegex = /\/\/ \[PLUGIN_ROUTES_INJECTION_POINT\].*$/m;
+        
+        if (injectionRegex.test(appContent)) {
+          appContent = appContent.replace(injectionRegex, `${marker}\n${routeStmt}`);
+        } else {
+          // Fallback if marker is missing: add to end of file (less ideal but better than failing)
+          appContent += `\n// Auto-injected route\napi.route('${config.routeInfo.path}', ${config.routeInfo.exportName});\n`;
+        }
+      }
+
+      writeFileSync(appPath, appContent);
+    }
+  }
+
   return {
     success: true,
     pluginName

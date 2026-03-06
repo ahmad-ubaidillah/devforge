@@ -5,5 +5,10 @@
   "packageDependencies": {
     "better-auth": "latest",
     "@better-auth/drizzle-adapter": "latest"
+  },
+  "routeInfo": {
+    "path": "/auth",
+    "importFile": "./modules/auth/routes/auth.routes",
+    "exportName": "authRoutes"
   }
 }

@@ -5,23 +5,27 @@ import { env } from './core/env';
 import { errorHandler } from './core/errors';
 import { userRoutes } from './modules/users/routes/user.routes';
 
+// Core Modules
+import { LandingPage } from './core/LandingPage';
+
 const app = new Hono();
 
 // Global Middleware
 app.use('*', logger());
 app.use('*', cors());
 
-// Health Check
+// UI - Landing Page
 app.get('/', (c) => {
-  return c.json({
-    message: 'Welcome to {{PROJECT_NAME}} - Powered by DevForge',
-    status: 'running',
-    version: '1.0.0'
-  });
+  return c.html(<LandingPage projectName="{{PROJECT_NAME}}" />);
 });
 
-// Feature Routes
-app.route('/api/users', userRoutes);
+// Feature Routes (Registry)
+const api = new Hono();
+api.route('/users', userRoutes);
+
+// [PLUGIN_ROUTES_INJECTION_POINT]
+
+app.route('/api', api);
 
 // Error Handling
 app.onError(errorHandler);

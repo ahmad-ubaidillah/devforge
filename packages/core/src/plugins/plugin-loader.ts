@@ -9,6 +9,11 @@ export const PluginConfigSchema = z.object({
   dependencies: z.array(z.string()).default([]),
   packageDependencies: z.record(z.string()).default({}),
   packageDevDependencies: z.record(z.string()).default({}),
+  routeInfo: z.object({
+    path: z.string(),
+    importFile: z.string(),
+    exportName: z.string(),
+  }).optional(),
 });
 
 export type PluginConfig = z.infer<typeof PluginConfigSchema>;

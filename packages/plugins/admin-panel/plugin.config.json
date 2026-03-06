@@ -6,5 +6,10 @@
     "lucide-react": "^0.300.0",
     "recharts": "^2.10.0"
   },
-  "packageDevDependencies": {}
+  "packageDevDependencies": {},
+  "routeInfo": {
+    "path": "/admin",
+    "importFile": "./modules/admin/routes/admin.routes",
+    "exportName": "adminRoutes"
+  }
 }
