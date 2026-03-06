@@ -1,16 +1,23 @@
 {
   "name": "@ahmadubaidillah/core",
-  "version": "1.0.3",
+  "version": "1.1.0",
+  "description": "The scaffolding engine and RTK-AI efficiency layer for DevForge.",
   "type": "module",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmad-ubaidillah/devforge.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/ahmad-ubaidillah/devforge/issues"
+  },
+  "homepage": "https://github.com/ahmad-ubaidillah/devforge#readme",
   "dependencies": {
-    "adm-zip": "^0.5.16",
-    "axios": "^1.13.6",
     "chalk": "latest",
     "fs-extra": "latest",
     "glob": "latest",
-    "ora": "latest",
-    "zod": "^3.22.4"
+    "zod": "latest"
   },
   "files": [
     "dist",
@@ -19,8 +26,5 @@
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {
-    "@types/adm-zip": "^0.5.7"
   }
 }

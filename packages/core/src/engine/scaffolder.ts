@@ -10,19 +10,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export function getTemplatesRoot() {
-  // Check typical locations
-  const possiblePaths = [
-    join(process.cwd(), 'templates'),                       // Local Dev (monorepo root)
-    join(__dirname, '..', 'templates'),                    // Published (dist/engine -> templates)
-    join(__dirname, '..', '..', 'templates'),              // Mixed/Deep dist
-    join(__dirname, '..', '..', '..', 'templates'),        // Local src deeply nested
+  // 1. Check if we are in a published environment (inside node_modules)
+  // The structure is usually node_modules/@ahmadubaidillah/core/dist/index.js
+  const publishedPath = join(__dirname, '..', 'templates');
+  if (existsSync(publishedPath)) return publishedPath;
+
+  // 2. Check for monorepo development (relative to CLI or Core)
+  const devPaths = [
+    join(process.cwd(), 'templates'),                       // Project root
+    join(__dirname, '..', '..', '..', 'templates'),        // From packages/core/dist
+    join(__dirname, '..', '..', '..', '..', 'templates'),   // From packages/cli/dist
   ];
 
-  for (const p of possiblePaths) {
-    if (existsSync(p)) return p;
+  for (const p of devPaths) {
+    if (existsSync(p)) {
+      // Basic validation: must contain at least one template directory
+      const saasCheck = join(p, 'saas', 'template.config.json');
+      if (existsSync(saasCheck)) return p;
+    }
   }
 
-  // Fallback to local templates if everything fails
+  // 3. Final Fallback: Try to find templates sibling to node_modules
   return join(process.cwd(), 'templates');
 }
 

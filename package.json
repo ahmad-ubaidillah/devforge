@@ -1,7 +1,16 @@
 {
   "name": "devforge",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.1.0",
+  "private": false,
+  "description": "The elite modular boilerplate ecosystem with agentic token optimization.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmad-ubaidillah/devforge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahmad-ubaidillah/devforge/issues"
+  },
+  "homepage": "https://github.com/ahmad-ubaidillah/devforge#readme",
   "module": "index.ts",
   "type": "module",
   "scripts": {

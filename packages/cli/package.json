@@ -1,16 +1,26 @@
 {
   "name": "@ahmadubaidillah/cli",
-  "version": "1.0.3",
+  "version": "1.1.0",
+  "description": "The elite modular boilerplate engine for agentic applications.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmad-ubaidillah/devforge.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/ahmad-ubaidillah/devforge/issues"
+  },
+  "homepage": "https://github.com/ahmad-ubaidillah/devforge#readme",
   "type": "module",
   "bin": {
     "devforge-cli": "dist/bin.js"
   },
   "dependencies": {
-    "@ahmadubaidillah/core": "^1.0.3",
     "@inquirer/prompts": "latest",
     "chalk": "latest",
     "commander": "latest",
-    "ora": "latest"
+    "ora": "latest",
+    "@ahmadubaidillah/core": "workspace:*"
   },
   "files": [
     "dist",
