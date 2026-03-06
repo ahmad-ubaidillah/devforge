@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "bin": {
-    "devforge-cli": "./src/bin.ts"
+    "devforge-cli": "./dist/bin.js"
   },
   "dependencies": {
     "@inquirer/prompts": "latest",
@@ -13,7 +13,7 @@
     "@ahmad-ubaidillah/core": "workspace:*"
   },
   "files": [
-    "src",
+    "dist",
     "README.md"
   ],
   "publishConfig": {

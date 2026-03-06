@@ -2,7 +2,7 @@
   "name": "@ahmad-ubaidillah/core",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "dependencies": {
     "adm-zip": "^0.5.16",
     "axios": "^1.13.6",
@@ -13,7 +13,8 @@
     "zod": "^3.22.4"
   },
   "files": [
-    "src",
+    "dist",
+    "templates",
     "README.md"
   ],
   "publishConfig": {
