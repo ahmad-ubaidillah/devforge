@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { join } from 'path';
 import { promptTemplate, promptPlugins, promptAgentKey } from '../prompts';
-import { scaffold } from '../../../core/src/engine/scaffolder';
+import { scaffold, getTemplatesRoot } from '../../../core/src/engine/scaffolder';
 import { loadTemplate } from '../../../core/src/engine/template-loader';
 
 export function registerCreateCommand(program: Command) {
@@ -19,7 +19,8 @@ export function registerCreateCommand(program: Command) {
         const projectName = name || 'my-devforge-app';
         const templateName = await promptTemplate();
         
-        const templatePath = join(process.cwd(), 'templates', templateName);
+        const templatesRoot = getTemplatesRoot();
+        const templatePath = join(templatesRoot, templateName);
         const templateConfig = loadTemplate(templatePath);
         
         const plugins = await promptPlugins(templateConfig.supportedPlugins);

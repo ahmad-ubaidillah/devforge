@@ -1,16 +1,16 @@
 {
   "name": "@ahmadubaidillah/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "bin": {
     "devforge-cli": "dist/bin.js"
   },
   "dependencies": {
+    "@ahmadubaidillah/core": "^1.0.3",
     "@inquirer/prompts": "latest",
     "chalk": "latest",
     "commander": "latest",
-    "ora": "latest",
-    "@ahmadubaidillah/core": "workspace:*"
+    "ora": "latest"
   },
   "files": [
     "dist",

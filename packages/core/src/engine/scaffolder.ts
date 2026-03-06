@@ -1,9 +1,30 @@
-import { join } from 'path';
+import { join, dirname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import { loadTemplate } from './template-loader';
 import { composeTemplate } from './template-composer';
 import { z } from 'zod';
 import { DevForgeError } from '../core/errors';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export function getTemplatesRoot() {
+  // Check typical locations
+  const possiblePaths = [
+    join(process.cwd(), 'templates'),                       // Local Dev (monorepo root)
+    join(__dirname, '..', 'templates'),                    // Published (dist/engine -> templates)
+    join(__dirname, '..', '..', 'templates'),              // Mixed/Deep dist
+    join(__dirname, '..', '..', '..', 'templates'),        // Local src deeply nested
+  ];
+
+  for (const p of possiblePaths) {
+    if (existsSync(p)) return p;
+  }
+
+  // Fallback to local templates if everything fails
+  return join(process.cwd(), 'templates');
+}
 
 export const scaffoldSchema = z.object({
   projectName: z.string().min(1),
@@ -26,7 +47,8 @@ export async function scaffold(options: ScaffoldInput) {
   const { projectName, templateName, targetDir, plugins, withAgents, agentKey } = result.data;
 
   // 1. Resolve template path
-  const templatePath = join(process.cwd(), 'templates', templateName);
+  const templatesRoot = getTemplatesRoot();
+  const templatePath = join(templatesRoot, templateName);
 
   if (!existsSync(templatePath)) {
     throw new Error(`Template "${templateName}" not found at ${templatePath}`);
