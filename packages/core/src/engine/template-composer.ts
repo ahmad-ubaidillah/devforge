@@ -14,8 +14,15 @@ export function composeTemplate(templatePath: string, targetDir: string, options
   // Copy all files from templates/files directory
   copySync(filesDir, targetDir);
 
+  // Auto-create .env from .env.example
+  const envExamplePath = join(targetDir, '.env.example');
+  const envPath = join(targetDir, '.env');
+  if (existsSync(envExamplePath) && !existsSync(envPath)) {
+    copySync(envExamplePath, envPath);
+  }
+
   // Apply variable replacements to specific entry files
-  const entryFiles = globSync(join(targetDir, '**/*.{ts,js,json,tsx,html,md}'));
+  const entryFiles = globSync(join(targetDir, '**/*.{ts,js,json,tsx,html,md,env,env.example}'));
   
   entryFiles.forEach(file => {
     let content = readFileSync(file, 'utf8');
