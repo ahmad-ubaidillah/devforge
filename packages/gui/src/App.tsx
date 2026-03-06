@@ -2,6 +2,7 @@ import { createSignal, For, Show, onMount, createEffect } from 'solid-js';
 import { createQuery, createMutation, useQueryClient } from '@tanstack/solid-query';
 import { Network } from 'vis-network';
 import { DataSet } from 'vis-data';
+import Sandbox from './Sandbox';
 
 export default function App() {
   const [activeTab, setActiveTab] = createSignal('projects');
@@ -138,6 +139,12 @@ export default function App() {
             class={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeTab() === 'graph' ? 'bg-white/10 text-white shadow-lg' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
           >
             Architecture
+          </button>
+          <button 
+            onClick={() => setActiveTab('sandbox')}
+            class={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${activeTab() === 'sandbox' ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/10 text-white shadow-lg shadow-cyan-500/10 border border-cyan-500/20' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
+          >
+            ✨ Studio
           </button>
         </div>
 
@@ -290,6 +297,10 @@ export default function App() {
               </div>
             </div>
           </div>
+        </Show>
+
+        <Show when={activeTab() === 'sandbox'}>
+          <Sandbox />
         </Show>
       </main>
 

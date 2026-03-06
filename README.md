@@ -88,8 +88,15 @@ We actively welcome contributions to build out this ecosystem.
 
 1. **Clone the repo.**
 2. **Install dependencies:** `bun install`
-3. **Run tests:** `npm test`
-4. Create a new branch, add your templates or core tests following the existing modular structure, and open a PR!
+3. **Initialize workspace:** Copy agent templates to active session files:
+   ```bash
+   cp tasks/template-task.md tasks/task.md
+   cp .agents/memory/template-core-memory.md .agents/memory/core-memory.md
+   ```
+   > **Note:** `task.md` and `core-memory.md` are `.gitignore`'d. They are session-specific files managed by the AI agent. Only the `template-*` versions are committed.
+4. **Run tests:** `bun run test`
+5. **Run health check:** `bun run packages/cli/src/bin.ts doctor`
+6. Create a new branch, add your templates or core tests following the existing modular structure, and open a PR!
 
 ---
 

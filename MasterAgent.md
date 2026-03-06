@@ -56,7 +56,25 @@ Whenever the user references or updates `tasks/task.md`, or whenever a task is c
 - When you reply to the user, briefly acknowledge that you have verified the alignment of the Task Tracker, Core Memory, and MasterAgent directives.
 
 ## 7. Debate & Recommendation Formatting
+
 When acting as a consultant, Product Manager, or discussing unfinalized architectures with the user, you **must not simply ask open-ended questions**. You must provide structured trade-off analyses incorporating:
+
 1. The Options.
 2. A definitive Recommendation ("I recommend X because...").
 3. A Pros and Cons comparison layout.
+
+## 8. Template-First File Management
+
+Session-specific files are **NOT committed to Git**. Only their templates are.
+
+| Committed Template                       | Active Session File (gitignored) |
+| ---------------------------------------- | -------------------------------- |
+| `tasks/template-task.md`                 | `tasks/task.md`                  |
+| `.agents/memory/template-core-memory.md` | `.agents/memory/core-memory.md`  |
+
+**Your Initialization Duties:**
+
+1. At the **start of every session**, check if `tasks/task.md` and `.agents/memory/core-memory.md` exist.
+2. If they are **missing**, run the `/init-workspace` workflow to copy from templates.
+3. Never instruct the user to commit the active files. Always commit the templates if structural changes to the format are needed.
+4. When a sprint is fully completed and the templates should reflect a new baseline, update the `template-*` files accordingly.

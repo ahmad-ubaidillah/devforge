@@ -67,6 +67,26 @@ app.get('/api/graph', (c) => {
   return c.json(data);
 });
 
+// UI Components Registry
+app.get('/api/ui/components', async (c) => {
+  const { uiRegistry } = await import('../core/src/ui/registry');
+  return c.json({ components: uiRegistry.getAllComponents() });
+});
+
+app.get('/api/ui/components/:name', async (c) => {
+  const { uiRegistry } = await import('../core/src/ui/registry');
+  const name = c.req.param('name');
+  const framework = c.req.query('framework') as 'solid' | 'react' | 'preact' | 'astro' | undefined;
+  
+  const component = uiRegistry.getComponent(name, framework);
+  if (!component) {
+    return c.json({ error: 'Component not found' }, 404);
+  }
+  
+  return c.json({ component });
+});
+
+
 export default {
   port: 4000,
   fetch: app.fetch,

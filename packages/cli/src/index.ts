@@ -11,6 +11,7 @@ import { installPlugin } from '../../core/src/plugins/plugin-installer';
 import { listAvailablePlugins } from '../../core/src/plugins/plugin-registry';
 import { runDiagnostics } from '../../core/src/utils/doctor';
 import { registerCreatePluginCommand } from './commands/create-plugin';
+import { registerUICommand } from './commands/ui';
 
 export function createProgram() {
   const program = new Command();
@@ -21,6 +22,7 @@ export function createProgram() {
     .version('1.0.0');
 
   registerCreatePluginCommand(program);
+  registerUICommand(program);
 
   program
     .command('create')

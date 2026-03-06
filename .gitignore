@@ -72,3 +72,8 @@ dist-ssr
 # Other local directories
 tmp/
 target-path/
+
+# Agent-managed session files (use templates for fresh clones)
+# The active files are generated from template-* on first run.
+tasks/task.md
+.agents/memory/core-memory.md
