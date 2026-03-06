@@ -1,105 +1,131 @@
-# DevForge CLI 🚀
+# 🛠️ DevForge CLI
 
-> **Modular Boilerplate Ecosystem for Modern Web Apps.**
+> **The Elite Modular Boilerplate Ecosystem with Agentic Token Optimization.**
 
-DevForge CLI is an ultra-fast, extensible scaffolding engine designed to eliminate "boilerplate fatigue". By providing production-grade, modular architectures out-of-the-box, it empowers developers, indie hackers, SaaS builders, and agencies to instantly spin up full-stack applications with optimal performance.
+![Token Efficiency](https://img.shields.io/badge/LLM_Efficiency-60--90%25_Savings-blueviolet?style=for-the-badge)
+![Tech Stack](https://img.shields.io/badge/Stack-Bun_%7C_Hono_%7C_Drizzle-000000?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge)
 
----
-
-## 🌟 Vision & Problem Solved
-
-Modern web development is often bogged down by recreating the exact same infrastructure: project structure, API layers, validation logic, database models, role permissions, and error handling. Existing tools are either overengineered and bloated, or underpowered and lacking clean architecture.
-
-DevForge bridges this gap, giving developers an ecosystem that is **fast, lightweight, scalable, and beautifully structured**.
-
-## 🏗️ Core Architecture & Standards
-
-DevForge enforces elite industry standards across all its templates:
-
-- **Feature-Based Architecture**: Unified modules containing their own routes, services, and repositories.
-- **Service Layer Pattern**: Decoupled business logic for maximum reusability and testability.
-- **Repository Pattern**: Strict database abstraction for clean model management.
-- **Zod-Powered Typings**: End-to-end tiered validation for environment variables, API payloads, and internal state.
-- **Centralized Resilience**: Global error handling with standardized semantic failure codes.
-- **Performance First**: Built securely on the Bun runtime and Hono framework, ensuring sub-100ms startup times and minimal bundle sizes.
+DevForge is a high-performance scaffolding engine designed for modern full-stack development. By combining **Modular Plugin Architecture** with **Advanced AI Context Management**, DevForge allows you to spin up robust, production-grade applications while minimizing LLM costs and maximizing agentic efficiency.
 
 ---
 
-## 📦 Monorepo Structure
+## ⚡ Why DevForge?
 
-DevForge itself is built as a robust monorepo to separate concerns efficiently:
+Modern development is often slowed down by repetitive boilerplate and exploding LLM token costs. DevForge solves both.
 
-- `packages/cli`: The primary interactive CLI engine.
-- `packages/core`: The overarching scaffolding engine and validators.
-- `packages/plugins`: Modular feature extensions (Auth, Payments, Media, etc.).
-- `templates/`: Production-ready, fully formed boilerplate stacks.
+### 🧩 1. Modular "Plugin-First" Architecture
 
-## 🛠️ Getting Started
+Unlike monolithic boilerplates, DevForge is built on a **Lego-like plugin system**. Start with a lean core and inject features as you need them.
 
-To spin up a new DevForge application in seconds:
+- **Auth**: Better Auth + Drizzle integrations.
+- **Payments**: Stripe multi-tenant billing loops.
+- **Search**: Unified Meilisearch abstraction.
+- **Analytics**: Server-side PostHog event tracking.
+- **Queue**: BullMQ + Redis task processing.
+
+### 🧠 2. Agentic Optimization (The "Special Sauce")
+
+DevForge includes a built-in **RTK-AI Intelligence Layer** that optimizes how AI agents (like Claude or Gemini) interact with your code.
+
+- **RTK-Filter**: Automated context compression (removes comments/noise) saving up to **90%** on context window tokens.
+- **Semantic Store**: Fact-based fragmented memory (mem0-style) instead of heavy monolithical history files.
+- **Context Pruning**: Intelligent truncation that keeps only structural signatures for large-scale analysis.
+
+### 🛡️ 3. Production Hardening
+
+Every generated file follows **DevForge Elite Standards**:
+
+- **Zod Validation**: Strict boundary parsing for all inputs.
+- **Service Layer**: Decoupled business logic (Separation of Concerns).
+- **Big O Efficiency**: Optimized database queries and payload sizes.
+- **Zero Secrets**: Hardened `.env` architecture with no hardcoded PII.
+
+---
+
+## 🚀 Getting Started
+
+DevForge is designed to be used via `npx` or `bunx` for zero-install scaffolding.
+
+### Create a New Project
 
 ```bash
-# Run the DevForge CLI directly
-npx devforge-cli create my-app
+npx devforge-cli create my-awesome-app
 ```
 
-You can then select your project type, frontend frameworks, backend stack, and plugin features dynamically.
+### Initialize Your Workspace (For Contributors)
+
+```bash
+bun install
+bun devforge doctor
+```
 
 ---
 
-## 🏗️ Supported Boilerplate Templates
+## 🛠️ CLI Command Reference
 
-DevForge CLI currently ships with **8 powerful application templates** designed for diverse use cases:
+The DevForge CLI is your command center for project lifecycle management.
 
-1. **Landing Page**: Astro + TailwindCSS + AlpineJS. Perfect for highly-optimized marketing and SaaS landing sites.
-2. **SaaS Application**: Bun + Hono + Drizzle ORM + Better Auth + SolidJS. A multi-tenant SaaS platform structure with subscriptions and roles.
-3. **CMS Platform**: Tiptap Editor + Media Library baked in for robust content management.
-4. **Marketplace**: End-to-end multi-vendor eCommerce setup including payments and inventory.
-5. **AI Wrapper**: Scaffolding designed specifically for generative AI APIs with built-in prompt management and usage tracking.
-6. **Booking / Scheduling**: Calendars, availability rules, and scheduling capabilities.
-7. **Finance Tool**: Core transaction tracking, budgets, and reporting dashboards.
-8. **CRM System**: Contact lists, lead pipelines, and task features.
-
----
-
-## 🧩 Plugin System & Extensibility
-
-One of DevForge's biggest superpowers is its **Advanced Plugin Engine**. During app generation, or systematically afterwards, you can seamlessly add modules:
-
-- Authentication (Better Auth, etc.)
-- Payments (Stripe)
-- Email Notifications
-- Search Providers (Meilisearch)
-- Analytics & Behavioral Tracking
-- and more!
-
-### 🔧 Key CLI Features
-
-- **Dependency Graph Validator**: Automatically detects and prevents circular architectural dependencies before they cause bugs.
-- **Auto Permission Binding**: Connect permissions implicitly to routes (`POST /products -> product.create`).
-- **Migration Resolver**: Automatically merge conflicting schema migrations across branches.
-- **Framework Agnostic Frontends**: Easily swap out SPA or SSR layers depending on your requirements.
+| Command  | Usage                     | Description                                                      |
+| :------- | :------------------------ | :--------------------------------------------------------------- |
+| `create` | `devforge create [name]`  | Scaffold a new project from 8+ premium templates.                |
+| `add`    | `devforge add [plugin]`   | Inject a new feature (stripe, auth, cms) into your existing app. |
+| `list`   | `devforge list`           | View all available plugins and official templates.               |
+| `gain`   | `devforge gain --history` | **Cost Analytics**: View token savings and efficiency metrics.   |
+| `doctor` | `devforge doctor`         | Health check for your architecture and dependencies.             |
+| `ui`     | `devforge ui`             | Launch the local DevForge Design System builder.                 |
 
 ---
 
-## 🤝 Contribution Guide
+## 🧠 Smart Context Management
 
-We actively welcome contributions to build out this ecosystem.
+DevForge agents use `rtk-filter` to ingest your code efficiently. You can influence this behavior via our internal levels:
 
-1. **Clone the repo.**
-2. **Install dependencies:** `bun install`
-3. **Initialize workspace:** Copy agent templates to active session files:
-   ```bash
-   cp tasks/template-task.md tasks/task.md
-   cp .agents/memory/template-core-memory.md .agents/memory/core-memory.md
-   ```
-   > **Note:** `task.md` and `core-memory.md` are `.gitignore`'d. They are session-specific files managed by the AI agent. Only the `template-*` versions are committed.
-4. **Run tests:** `bun run test`
-5. **Run health check:** `bun run packages/cli/src/bin.ts doctor`
-6. Create a new branch, add your templates or core tests following the existing modular structure, and open a PR!
+1.  **None**: Raw file ingestion (No savings).
+2.  **Minimal**: Removes comments and normalizes whitespace (**~30-40% savings**).
+3.  **Aggressive**: Prunes function/interface bodies, leaving only signatures and types (**~70-90% savings**).
+
+_View your real-time performance with:_
+
+```bash
+devforge gain
+```
+
+---
+
+## 📦 Project Structure
+
+```text
+devforge/
+├── packages/
+│   ├── cli/          # Command Line Interface (Commander.js)
+│   ├── core/         # Scaffolding Engine & Shared Utilities
+│   └── plugins/      # Modular Features (Stripe, Auth, CMS, etc.)
+├── templates/        # Full-stack Boilerplate Stacks (SaaS, AI, CRM)
+└── .agents/          # Agent Roles, Skills & Workflows
+```
+
+---
+
+## 🤝 Contributing
+
+We follow a **Strict Modular SDLC**. Every new feature must include:
+
+1.  **Zod Schema** for validation.
+2.  **Service Layer** implementation.
+3.  **Smoke Test** in `/tests/plugins.test.ts`.
+4.  **Token Efficiency Audit**.
+
+### Local Setup
+
+1. Clone the repository.
+2. `bun install`
+3. Check status: `bun run packages/cli/src/bin.ts gain`
 
 ---
 
 ## 📄 License
 
-DevForge is [MIT licensed](LICENSE). Build something amazing!
+DevForge is [MIT licensed](LICENSE).
+
+**Build fast. Build lean. Build with DevForge.**
